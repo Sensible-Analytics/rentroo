@@ -11,10 +11,10 @@ COPY types types
 COPY services/common services/common
 COPY services/resetservice services/resetservice
 RUN --mount=type=cache,id=node_modules,target=/root/.yarn YARN_CACHE_FOLDER=/root/.yarn \
-    yarn workspaces focus @rentro/resetservice && \
-    yarn workspace @rentro/types run build && \
-    yarn workspace @rentro/common run build && \
-    yarn workspace @rentro/resetservice run build
+    yarn workspaces focus @rentrooo/resetservice && \
+    yarn workspace @rentrooo/types run build && \
+    yarn workspace @rentrooo/common run build && \
+    yarn workspace @rentrooo/resetservice run build
 
 FROM base AS deps
 WORKDIR /usr/app
@@ -29,7 +29,7 @@ COPY --from=build /usr/app/services/resetservice/package.json ./services/resetse
 COPY --from=build /usr/app/services/common/dist ./services/common/dist
 COPY --from=build /usr/app/services/resetservice/dist ./services/resetservice/dist
 RUN --mount=type=cache,id=node_modules,target=/root/.yarn YARN_CACHE_FOLDER=/root/.yarn \
-    yarn workspaces focus --production @rentro/resetservice
+    yarn workspaces focus --production @rentrooo/resetservice
 
 FROM gcr.io/distroless/nodejs20-debian12
 ENV NODE_ENV production
