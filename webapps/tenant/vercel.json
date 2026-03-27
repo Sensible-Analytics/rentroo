@@ -1,0 +1,34 @@
+{
+  "version": 2,
+  "name": "rentroo-tenant",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "buildCommand": "cd ../.. && yarn install && yarn build && cd webapps/tenant && yarn build",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "env": {
+    "NEXT_PUBLIC_APP_NAME": "Rentro",
+    "NEXT_PUBLIC_GATEWAY_URL": "https://api.rentroo.app",
+    "NEXT_PUBLIC_BASE_PATH": "/tenant"
+  },
+  "regions": ["syd1"],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
+    }
+  ]
+}

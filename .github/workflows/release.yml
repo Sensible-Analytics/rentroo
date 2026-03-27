@@ -1,0 +1,153 @@
+name: Release
+
+on: 
+  release:
+    types: [published]
+
+jobs:
+  
+  build-upload-commands:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Get tag
+        run: |
+         TAG=${{ github.event.release.tag_name }}
+         echo "RELEASE_TAG=${TAG#v}" >> $GITHUB_ENV
+    
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: install node v20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build
+        run: |
+         yarn install
+         npm install -g @yao-pkg/pkg
+         yarn workspaces focus @rentroo/cli
+         pkg cli/package.json --compress Brotli --output mre
+         mv mre-linux mre
+         mv mre-win.exe mre.exe
+
+      - name: Compress
+        run: |
+         tar -zczf mre-linux-x64.tar.gz backup base.env docker-compose.microservices.base.yml docker-compose.microservices.prod.yml mre
+         tar -zczf mre-macos-x64.tar.gz backup base.env docker-compose.microservices.base.yml docker-compose.microservices.prod.yml mre-macos
+         zip mre-win-x64.zip backup base.env docker-compose.microservices.base.yml docker-compose.microservices.prod.yml mre.exe
+    
+      - name: Upload commands in release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.event.release.tag_name }}
+          name: ${{ github.event.release.tag_name }}
+          files: |
+            ./mre-linux-x64.tar.gz
+            ./mre-macos-x64.tar.gz
+            ./mre-win-x64.zip
+
+  build-desktop-app:
+    name: Build Desktop App (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Build Mac Desktop App
+        if: matrix.os == 'macos-latest'
+        run: yarn workspace @rentroo/desktop-app build:mac
+
+      - name: Build Windows Desktop App
+        if: matrix.os == 'windows-latest'
+        run: yarn workspace @rentroo/desktop-app build:win
+
+      - name: Build Linux Desktop App
+        if: matrix.os == 'ubuntu-latest'
+        run: yarn workspace @rentroo/desktop-app build:linux
+
+      - name: Upload Desktop App Release Assets
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.event.release.tag_name }}
+          files: |
+            desktop-app/dist/*.dmg
+            desktop-app/dist/*.exe
+            desktop-app/dist/*.AppImage
+
+  build-push-images:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+            - appname: gateway
+              dockerfile: services/gateway/Dockerfile
+            - appname: api
+              dockerfile: services/api/Dockerfile
+            - appname: tenantapi
+              dockerfile: services/tenantapi/Dockerfile
+            - appname: authenticator
+              dockerfile: services/authenticator/Dockerfile
+            - appname: pdfgenerator
+              dockerfile: services/pdfgenerator/Dockerfile
+            - appname: emailer
+              dockerfile: services/emailer/Dockerfile
+            - appname: resetservice
+              dockerfile: services/resetservice/Dockerfile
+            - appname: landlord-frontend
+              dockerfile: webapps/landlord/Dockerfile
+            - appname: tenant-frontend
+              dockerfile: webapps/tenant/Dockerfile
+
+    steps:
+        - name: Get tag
+          run: |
+           TAG=${{ github.event.release.tag_name }}
+           echo "RELEASE_TAG=${TAG#v}" >> $GITHUB_ENV
+
+        - name: Checkout
+          uses: actions/checkout@v3
+
+        - name: Set up Image Name (lowercase)
+          run: |
+            REPO_LOWER=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+            echo "IMAGE_NAME=ghcr.io/${REPO_LOWER}/${{ matrix.appname }}" >> $GITHUB_ENV
+
+        - name: Login to GitHub Container Registry
+          uses: docker/login-action@v2
+          with:
+            registry: ghcr.io
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+
+        - name: Extract metadata (tags, labels) for Docker
+          id: meta
+          uses: docker/metadata-action@v4
+          with:
+            images: ${{ env.IMAGE_NAME }}
+
+        - name: Build and push to GitHub Container Registry
+          uses: docker/build-push-action@v4
+          with:
+            context: .
+            file: ${{ matrix.dockerfile }}
+            push: true
+            tags: '${{ env.IMAGE_NAME }}:${{ env.RELEASE_TAG }},${{ env.IMAGE_NAME }}:latest'
+            labels: ${{ steps.meta.outputs.labels }}
+
+     

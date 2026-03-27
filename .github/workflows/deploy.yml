@@ -1,0 +1,154 @@
+name: Deploy to Oracle Cloud (One-Click)
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+    inputs:
+      provision_infra:
+        description: 'Provision Infrastructure using Terraform?'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  infrastructure:
+    if: github.event.inputs.provision_infra == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: cd terraform && terraform init
+
+      - name: Terraform Apply
+        run: cd terraform && terraform apply -auto-approve
+        env:
+          TF_VAR_tenancy_ocid: ${{ secrets.OCI_TENANCY_OCID }}
+          TF_VAR_user_ocid: ${{ secrets.OCI_USER_OCID }}
+          TF_VAR_fingerprint: ${{ secrets.OCI_FINGERPRINT }}
+          TF_VAR_private_key_path: ${{ secrets.OCI_PRIVATE_KEY_PATH }}
+          TF_VAR_region: ${{ secrets.OCI_REGION }}
+          TF_VAR_compartment_ocid: ${{ secrets.OCI_COMPARTMENT_OCID }}
+          TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
+
+  build-and-push:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - appname: gateway
+            image: ghcr.io/sensible-analytics/rentroo/gateway
+            dockerfile: services/gateway/Dockerfile
+          - appname: api
+            image: ghcr.io/sensible-analytics/rentroo/api
+            dockerfile: services/api/Dockerfile
+          - appname: tenantapi
+            image: ghcr.io/sensible-analytics/rentroo/tenantapi
+            dockerfile: services/tenantapi/Dockerfile
+          - appname: authenticator
+            image: ghcr.io/sensible-analytics/rentroo/authenticator
+            dockerfile: services/authenticator/Dockerfile
+          - appname: pdfgenerator
+            image: ghcr.io/sensible-analytics/rentroo/pdfgenerator
+            dockerfile: services/pdfgenerator/Dockerfile
+          - appname: emailer
+            image: ghcr.io/sensible-analytics/rentroo/emailer
+            dockerfile: services/emailer/Dockerfile
+          - appname: resetservice
+            image: ghcr.io/sensible-analytics/rentroo/resetservice
+            dockerfile: services/resetservice/Dockerfile
+          - appname: landlord-frontend
+            image: ghcr.io/sensible-analytics/rentroo/landlord-frontend
+            dockerfile: webapps/landlord/Dockerfile
+          - appname: tenant-frontend
+            image: ghcr.io/sensible-analytics/rentroo/tenant-frontend
+            dockerfile: webapps/tenant/Dockerfile
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ${{ matrix.dockerfile }}
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: ${{ matrix.image }}:latest
+
+  deploy:
+    needs: [build-and-push]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Copy deployment files to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.INSTANCE_IP }}
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "docker-compose.yml,base.env"
+          target: "~/app"
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.INSTANCE_IP }}
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            if ! command -v docker &> /dev/null; then
+              sudo apt-get update
+              sudo apt-get install -y docker.io docker-compose
+              sudo systemctl start docker
+              sudo systemctl enable docker
+            fi
+            mkdir -p ~/app
+            cd ~/app
+            mv -f ~/app/base.env ~/app/.env 2>/dev/null || true
+            echo "GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" > .env.ghcr
+            sudo docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
+            sudo docker-compose pull
+            sudo docker-compose up -d
+
+      - name: Post-Deployment Healthcheck
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.INSTANCE_IP }}
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "Waiting for app to be healthy..."
+            for i in {1..20}; do
+              if curl -s -f http://localhost:8080/landlord > /dev/null; then
+                echo "App is healthy!"
+                exit 0
+              fi
+              echo "Still waiting... ($i/20)"
+              sleep 10
+            done
+            echo "App failed to become healthy."
+            sudo docker-compose ps
+            sudo docker-compose logs --tail 50
+            exit 1
