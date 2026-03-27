@@ -1,0 +1,202 @@
+# Production Docker Compose for Rentrooo
+# This file is optimized for production deployment
+
+services:
+  ###############################################################################
+  # MongoDB
+  ###############################################################################
+  mongo:
+    image: mongo:7
+    container_name: rentrooo-mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:-changeme}
+    command: --quiet --logpath /dev/null
+    volumes:
+      - mongo_data:/data/db
+      - ./backup:/backup
+    networks:
+      - rentrooo-net
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+
+  ###############################################################################
+  # Redis
+  ###############################################################################
+  redis:
+    image: redis:7.4-bookworm
+    container_name: rentrooo-redis
+    restart: always
+    command: >
+      sh -c "docker-entrypoint.sh 
+      --requirepass $${REDIS_PASSWORD:-redis_password} 
+      --loglevel warning"
+    volumes:
+      - redis_data:/data
+    networks:
+      - rentrooo-net
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ###############################################################################
+  # Gateway
+  ###############################################################################
+  gateway:
+    build:
+      context: .
+      dockerfile: services/gateway/Dockerfile
+    container_name: rentrooo-gateway
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - PORT=8080
+      - BASE_PATH=${BASE_PATH:-/}
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-*}
+      - API_URL=http://api:3001
+      - AUTHENTICATOR_URL=http://authenticator:3002
+      - EMAILER_URL=http://emailer:3003
+      - PDFGENERATOR_URL=http://pdfgenerator:3004
+      - TENANTAPI_URL=http://tenantapi:3005
+    ports:
+      - '8080:8080'
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - rentrooo-net
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:8080/health']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  ###############################################################################
+  # API Service
+  ###############################################################################
+  api:
+    build:
+      context: .
+      dockerfile: services/api/Dockerfile
+    container_name: rentrooo-api
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - MONGO_URL=mongodb://mongo:27017/rentrooo
+      - REDIS_URL=redis://redis:6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-redis_password}
+      - AUTHENTICATOR_ACCESS_TOKEN_SECRET=${AUTHENTICATOR_ACCESS_TOKEN_SECRET}
+      - AUTHENTICATOR_REFRESH_TOKEN_SECRET=${AUTHENTICATOR_REFRESH_TOKEN_SECRET}
+      - AUTHENTICATOR_RESET_TOKEN_SECRET=${AUTHENTICATOR_RESET_TOKEN_SECRET}
+      - CIPHER_KEY=${CIPHER_KEY}
+      - CIPHER_IV_KEY=${CIPHER_IV_KEY}
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - rentrooo-net
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:3001/health']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  ###############################################################################
+  # Authenticator Service
+  ###############################################################################
+  authenticator:
+    build:
+      context: .
+      dockerfile: services/authenticator/Dockerfile
+    container_name: rentrooo-authenticator
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - PORT=3002
+      - MONGO_URL=mongodb://mongo:27017/rentrooo
+      - REDIS_URL=redis://redis:6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-redis_password}
+      - AUTHENTICATOR_ACCESS_TOKEN_SECRET=${AUTHENTICATOR_ACCESS_TOKEN_SECRET}
+      - AUTHENTICATOR_REFRESH_TOKEN_SECRET=${AUTHENTICATOR_REFRESH_TOKEN_SECRET}
+      - AUTHENTICATOR_RESET_TOKEN_SECRET=${AUTHENTICATOR_RESET_TOKEN_SECRET}
+      - CIPHER_KEY=${CIPHER_KEY}
+      - CIPHER_IV_KEY=${CIPHER_IV_KEY}
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - rentrooo-net
+
+  ###############################################################################
+  # Emailer Service
+  ###############################################################################
+  emailer:
+    build:
+      context: .
+      dockerfile: services/emailer/Dockerfile
+    container_name: rentrooo-emailer
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - PORT=3003
+      - MONGO_URL=mongodb://mongo:27017/rentrooo
+      - REDIS_URL=redis://redis:6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-redis_password}
+      - EMAIL_FROM=${EMAIL_FROM:-noreply@rentrooo.app}
+      - EMAIL_TRANSPORT=${EMAIL_TRANSPORT:-mailgun}
+      - MAILGUN_API_KEY=${MAILGUN_API_KEY}
+      - MAILGUN_DOMAIN=${MAILGUN_DOMAIN}
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - rentrooo-net
+
+  ###############################################################################
+  # PDF Generator Service
+  ###############################################################################
+  pdfgenerator:
+    build:
+      context: .
+      dockerfile: services/pdfgenerator/Dockerfile
+    container_name: rentrooo-pdfgenerator
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - PORT=3004
+      - MONGO_URL=mongodb://mongo:27017/rentrooo
+      - REDIS_URL=redis://redis:6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-redis_password}
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - rentrooo-net
+
+volumes:
+  mongo_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  rentrooo-net:
+    driver: bridge
