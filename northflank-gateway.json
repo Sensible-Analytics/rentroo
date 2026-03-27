@@ -1,0 +1,21 @@
+{
+  "name": "gateway",
+  "type": "combined",
+  "build": {
+    "type": "dockerfile",
+    "dockerfilePath": "services/gateway/Dockerfile"
+  },
+  "deployment": {
+    "instances": 1,
+    "resources": {
+      "cpu": "0.5",
+      "memory": "512Mi"
+    },
+    "ports": [
+      {
+        "port": 8080,
+        "protocol": "http"
+      }
+    ]
+  }
+}
