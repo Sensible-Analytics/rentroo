@@ -12,13 +12,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@alloc/quick-lru@npm:^5.2.0":
-  version: 5.2.0
-  resolution: "@alloc/quick-lru@npm:5.2.0"
-  checksum: bdc35758b552bcf045733ac047fb7f9a07c4678b944c641adfbd41f798b4b91fffd0fdc0df2578d9b0afc7b4d636aa6e110ead5d6281a2adc1ab90efd7f057f8
-  languageName: node
-  linkType: hard
-
 "@ampproject/remapping@npm:^2.2.0":
   version: 2.3.0
   resolution: "@ampproject/remapping@npm:2.3.0"
@@ -1805,7 +1798,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jridgewell/gen-mapping@npm:^0.3.2, @jridgewell/gen-mapping@npm:^0.3.5":
+"@jridgewell/gen-mapping@npm:^0.3.5":
   version: 0.3.5
   resolution: "@jridgewell/gen-mapping@npm:0.3.5"
   dependencies:
@@ -2099,447 +2092,6 @@ __metadata:
   checksum: e69c3b0b372e15af88c285f6884ac0e3ba5fc7227b8ddc7f4bef94cb5675057126dc0ae9001e2a623d7ec61727d9b5e69b8e61be8618afe0baf40081ad3b0568
   languageName: node
   linkType: hard
-
-"@microrealestate/api@workspace:services/api":
-  version: 0.0.0-use.local
-  resolution: "@microrealestate/api@workspace:services/api"
-  dependencies:
-    "@microrealestate/common": "*"
-    "@typescript-eslint/eslint-plugin": 7.15.0
-    "@typescript-eslint/parser": 7.15.0
-    axios: 1.8.4
-    eslint: 8.57.0
-    eslint-config-prettier: 9.1.0
-    eslint-plugin-import: 2.29.1
-    i18n: 0.13.3
-    jest: 29.7.0
-    json2csv: 5.0.6
-    jsonwebtoken: 9.0.0
-    lodash: 4.17.21
-    moment: 2.29.4
-    mongobackup: 0.3.5
-    nanoid: 5.1.0
-    nodemon: 3.1.4
-    npm-run-all: 4.1.5
-    rimraf: 6.0.1
-    supertest: 6.1.3
-    typescript: 5.5.4
-  languageName: unknown
-  linkType: soft
-
-"@microrealestate/authenticator@workspace:services/authenticator":
-  version: 0.0.0-use.local
-  resolution: "@microrealestate/authenticator@workspace:services/authenticator"
-  dependencies:
-    "@microrealestate/common": "*"
-    "@typescript-eslint/eslint-plugin": 7.15.0
-    "@typescript-eslint/parser": 7.15.0
-    axios: 1.8.4
-    bcrypt: 5.1.1
-    eslint: 8.57.0
-    eslint-config-prettier: 9.1.0
-    eslint-plugin-import: 2.29.1
-    jsonwebtoken: 9.0.0
-    locale: 0.1.0
-    nanoid: 5.1.0
-    nodemon: 3.1.4
-    npm-run-all: 4.1.5
-    rimraf: 6.0.1
-    typescript: 5.5.4
-  languageName: unknown
-  linkType: soft
-
-"@microrealestate/cli@workspace:cli":
-  version: 0.0.0-use.local
-  resolution: "@microrealestate/cli@workspace:cli"
-  dependencies:
-    chalk: 4.1.2
-    clear: 0.1.0
-    dotenv: 16.0.1
-    dotenv-expand: 8.0.3
-    eslint: 8.57.0
-    eslint-config-prettier: 9.1.0
-    eslint-plugin-import: 2.29.1
-    figlet: 1.5.2
-    inquirer: 8.2.4
-    jest: 29.7.0
-    minimist: 1.2.6
-    moment: 2.29.4
-    which: 4.0.0
-  bin:
-    cli: src/index.js
-  languageName: unknown
-  linkType: soft
-
-"@microrealestate/common@*, @microrealestate/common@workspace:services/common":
-  version: 0.0.0-use.local
-  resolution: "@microrealestate/common@workspace:services/common"
-  dependencies:
-    "@microrealestate/types": "*"
-    "@types/bcrypt": 5.0.1
-    "@types/cookie-parser": 1.4.5
-    "@types/express": 4.17.20
-    "@types/jsonwebtoken": 9.0.4
-    "@types/lodash": 4.17.5
-    "@types/method-override": 0.0.34
-    "@typescript-eslint/eslint-plugin": 7.15.0
-    "@typescript-eslint/parser": 7.15.0
-    axios: 1.8.4
-    bcrypt: 5.1.1
-    cookie-parser: 1.4.7
-    eslint: 8.57.0
-    eslint-config-prettier: 9.1.0
-    eslint-plugin-import: 2.29.1
-    express: 4.21.1
-    express-mongo-sanitize: 2.2.0
-    express-winston: 4.2.0
-    jest: 29.7.0
-    jsonwebtoken: 9.0.0
-    lodash: 4.17.21
-    method-override: 3.0.0
-    mongoose: 6.13.6
-    npm-run-all: 4.1.5
-    redis: 4.6.10
-    rimraf: 6.0.1
-    typescript: 5.5.4
-    winston: 3.13.1
-  languageName: unknown
-  linkType: soft
-
-"@microrealestate/commonui@*, @microrealestate/commonui@workspace:webapps/commonui":
-  version: 0.0.0-use.local
-  resolution: "@microrealestate/commonui@workspace:webapps/commonui"
-  dependencies:
-    "@babel/core": 7.21.3
-    "@material-ui/core": 4.12.4
-    "@material-ui/icons": 4.11.3
-    "@material-ui/pickers": 3.3.10
-    eslint: 8.57.0
-    eslint-config-prettier: 9.1.0
-    eslint-plugin-import: 2.29.1
-    eslint-plugin-react: 7.33.2
-    eslint-plugin-react-hooks: 4.6.0
-    formik: 2.2.9
-    moment: 2.29.4
-    next: 14.2.26
-    next-translate: 2.6.2
-    next-translate-plugin: 2.6.2
-    prop-types: 15.8.1
-    react: 18.2.0
-    react-dom: 18.2.0
-    require-from-string: 2.0.2
-  languageName: unknown
-  linkType: soft
-
-"@microrealestate/desktop-app@workspace:desktop-app":
-  version: 0.0.0-use.local
-  resolution: "@microrealestate/desktop-app@workspace:desktop-app"
-  dependencies:
-    "@playwright/test": ^1.42.1
-    better-sqlite3: ^9.4.1
-    chokidar: ^3.6.0
-    electron: 29.1.1
-    electron-builder: ^26.8.1
-    electron-rebuild: ^3.2.9
-    pdf-parse: ^1.1.1
-    recharts: ^2.12.2
-    tesseract.js: ^5.0.4
-    vitest: ^1.4.0
-    xlsx: ^0.18.5
-  languageName: unknown
-  linkType: soft
-
-"@microrealestate/e2e@workspace:e2e":
-  version: 0.0.0-use.local
-  resolution: "@microrealestate/e2e@workspace:e2e"
-  dependencies:
-    cypress: 14.4.1
-    dotenv: 16.0.1
-    dotenv-expand: 8.0.3
-    eslint: 8.57.0
-    eslint-config-prettier: 9.1.0
-    eslint-plugin-cypress: 2.15.1
-    eslint-plugin-import: 2.29.1
-    i18next: 21.8.14
-    moment: 2.29.4
-  languageName: unknown
-  linkType: soft
-
-"@microrealestate/emailer@workspace:services/emailer":
-  version: 0.0.0-use.local
-  resolution: "@microrealestate/emailer@workspace:services/emailer"
-  dependencies:
-    "@microrealestate/common": "*"
-    "@typescript-eslint/eslint-plugin": 7.15.0
-    "@typescript-eslint/parser": 7.15.0
-    axios: 1.8.4
-    ejs: 3.1.10
-    eslint: 8.57.0
-    eslint-config-prettier: 9.1.0
-    eslint-plugin-import: 2.29.1
-    i18n: 0.14.2
-    jsonwebtoken: 9.0.0
-    locale: 0.1.0
-    moment: 2.29.4
-    nodemailer: 6.9.14
-    nodemailer-mailgun-transport: 2.1.5
-    nodemon: 3.1.4
-    npm-run-all: 4.1.5
-    rimraf: 6.0.1
-    typescript: 5.5.4
-  languageName: unknown
-  linkType: soft
-
-"@microrealestate/gateway@workspace:services/gateway":
-  version: 0.0.0-use.local
-  resolution: "@microrealestate/gateway@workspace:services/gateway"
-  dependencies:
-    "@microrealestate/common": "*"
-    "@microrealestate/types": "*"
-    "@types/cors": 2.8.15
-    axios: 1.8.4
-    cors: 2.8.5
-    eslint: 8.57.0
-    eslint-config-prettier: 9.1.0
-    eslint-plugin-import: 2.29.1
-    http-proxy-middleware: 2.0.7
-    npm-run-all: 4.1.5
-    rimraf: 6.0.1
-    tsx: 3.14.0
-    typescript: 5.5.4
-  languageName: unknown
-  linkType: soft
-
-"@microrealestate/landlord@workspace:webapps/landlord":
-  version: 0.0.0-use.local
-  resolution: "@microrealestate/landlord@workspace:webapps/landlord"
-  dependencies:
-    "@babel/core": 7.21.3
-    "@date-io/core": 1.3.13
-    "@date-io/moment": 1.3.13
-    "@material-ui/core": 4.12.4
-    "@material-ui/pickers": 3.3.10
-    "@microrealestate/commonui": "*"
-    "@radix-ui/react-avatar": 1.1.1
-    "@radix-ui/react-checkbox": 1.1.2
-    "@radix-ui/react-collapsible": 1.1.1
-    "@radix-ui/react-dialog": 1.1.2
-    "@radix-ui/react-label": 2.1.0
-    "@radix-ui/react-popover": 1.1.2
-    "@radix-ui/react-progress": 1.1.0
-    "@radix-ui/react-select": 2.1.2
-    "@radix-ui/react-separator": 1.1.0
-    "@radix-ui/react-slot": 1.1.0
-    "@radix-ui/react-switch": 1.1.1
-    "@radix-ui/react-tabs": 1.1.1
-    "@radix-ui/react-toggle": 1.1.0
-    "@radix-ui/react-toggle-group": 1.1.0
-    "@radix-ui/react-tooltip": 1.1.3
-    "@react-pdf-viewer/core": 3.12.0
-    "@react-pdf-viewer/default-layout": 3.12.0
-    "@react-pdf-viewer/full-screen": 3.12.0
-    "@react-pdf-viewer/print": 3.12.0
-    "@tanstack/react-query": 5.29.0
-    "@tiptap/core": 2.6.6
-    "@tiptap/extension-placeholder": 2.6.6
-    "@tiptap/extension-superscript": 2.6.6
-    "@tiptap/extension-table": 2.6.6
-    "@tiptap/extension-table-cell": 2.6.6
-    "@tiptap/extension-table-header": 2.6.6
-    "@tiptap/extension-table-row": 2.6.6
-    "@tiptap/extension-text-align": 2.6.6
-    "@tiptap/extension-underline": 2.6.6
-    "@tiptap/pm": 2.6.6
-    "@tiptap/react": 2.6.6
-    "@tiptap/starter-kit": 2.6.6
-    "@types/lodash": 4.17.5
-    autoprefixer: 10.4.20
-    axios: 1.8.4
-    babel-loader: 8.2.5
-    class-variance-authority: 0.7.0
-    clsx: 2.1.0
-    currency-codes: 2.1.0
-    currency-symbol-map: 5.1.0
-    date-fns: 3.6.0
-    eslint: 8.57.0
-    eslint-config-next: 14.2.26
-    eslint-config-prettier: 9.1.0
-    eslint-plugin-import: 2.29.1
-    fdir: 5.2.0
-    formik: 2.2.9
-    jose: 4.15.5
-    js-file-download: 0.4.12
-    jsesc: 3.0.2
-    lodash: 4.17.21
-    material-ui-formik-components: 0.7.3
-    mobx: 6.12.3
-    mobx-react-lite: 3.4.3
-    moment: 2.29.4
-    nanoid: 5.1.0
-    next: 14.2.26
-    next-themes: 0.3.0
-    next-translate: 2.6.2
-    next-translate-plugin: 2.6.2
-    pdfjs-dist: 3.11.174
-    pigeon-maps: 0.21.3
-    postcss: 8.5.3
-    prop-types: 15.8.1
-    react: 18.2.0
-    react-awesome-lightbox: 1.8.1
-    react-day-picker: 8.10.0
-    react-dom: 18.2.0
-    react-icons: 5.3.0
-    recharts: 2.13.3
-    sonner: 1.4.41
-    tailwind-merge: 2.5.2
-    tailwindcss: 3.4.10
-    tailwindcss-animate: 1.0.7
-    usehooks-ts: 3.1.0
-    vaul: 0.9.0
-    yup: 0.32.11
-  languageName: unknown
-  linkType: soft
-
-"@microrealestate/pdfgenerator@workspace:services/pdfgenerator":
-  version: 0.0.0-use.local
-  resolution: "@microrealestate/pdfgenerator@workspace:services/pdfgenerator"
-  dependencies:
-    "@microrealestate/common": "*"
-    "@typescript-eslint/eslint-plugin": 7.15.0
-    "@typescript-eslint/parser": 7.15.0
-    async-mutex: 0.5.0
-    aws-sdk: 2.1677.0
-    ejs: 3.1.10
-    eslint: 8.57.0
-    eslint-config-prettier: 9.1.0
-    eslint-plugin-import: 2.29.1
-    file-url: 3.0.0
-    fs-extra: 10.1.0
-    handlebars: 4.7.7
-    i18n: 0.14.2
-    jsonwebtoken: 9.0.0
-    locale: 0.1.0
-    moment: 2.29.4
-    multer: 1.4.5-lts.1
-    nodemon: 3.1.4
-    npm-run-all: 4.1.5
-    puppeteer: 23.2.1
-    rimraf: 6.0.1
-    sanitize-filename: 1.6.3
-    typescript: 5.5.4
-  languageName: unknown
-  linkType: soft
-
-"@microrealestate/resetservice@workspace:services/resetservice":
-  version: 0.0.0-use.local
-  resolution: "@microrealestate/resetservice@workspace:services/resetservice"
-  dependencies:
-    "@microrealestate/common": "*"
-    "@microrealestate/types": "*"
-    "@typescript-eslint/eslint-plugin": 7.15.0
-    "@typescript-eslint/parser": 7.15.0
-    eslint: 8.57.0
-    eslint-config-prettier: 9.1.0
-    eslint-plugin-import: 2.29.1
-    npm-run-all: 4.1.5
-    rimraf: 6.0.1
-    tsx: 3.14.0
-    typescript: 5.5.4
-  languageName: unknown
-  linkType: soft
-
-"@microrealestate/tenant@workspace:webapps/tenant":
-  version: 0.0.0-use.local
-  resolution: "@microrealestate/tenant@workspace:webapps/tenant"
-  dependencies:
-    "@formatjs/intl-localematcher": 0.4.2
-    "@hookform/resolvers": 3.3.2
-    "@microrealestate/types": "*"
-    "@radix-ui/react-avatar": 1.1.3
-    "@radix-ui/react-dialog": 1.1.6
-    "@radix-ui/react-hover-card": 1.1.6
-    "@radix-ui/react-label": 2.1.2
-    "@radix-ui/react-popover": 1.1.6
-    "@radix-ui/react-select": 2.1.6
-    "@radix-ui/react-separator": 1.1.2
-    "@radix-ui/react-slot": 1.1.2
-    "@radix-ui/react-toast": 1.2.6
-    "@radix-ui/react-tooltip": 1.1.8
-    "@types/negotiator": 0.6.2
-    "@types/node": 22.13.5
-    "@types/react": 18.2.32
-    "@types/react-dom": 18.2.14
-    "@typescript-eslint/eslint-plugin": 7.15.0
-    "@typescript-eslint/parser": 7.15.0
-    autoprefixer: 10.4.20
-    axios: 1.8.4
-    class-variance-authority: 0.7.1
-    clsx: 2.1.1
-    date-fns: 2.30.0
-    eslint: 8.57.0
-    eslint-config-next: 14.2.26
-    eslint-config-prettier: 9.1.0
-    eslint-import-resolver-typescript: 3.6.1
-    eslint-plugin-import: 2.29.1
-    input-otp: 1.4.2
-    js-file-download: 0.4.12
-    lucide-react: 0.475.0
-    moment: 2.30.1
-    negotiator: 0.6.3
-    next: 14.2.26
-    next-runtime-env: 3.2.1
-    npm-run-all: 4.1.5
-    postcss: 8.5.3
-    react: 18.2.0
-    react-day-picker: 8.10.1
-    react-dom: 18.2.0
-    react-hook-form: 7.54.2
-    rimraf: 6.0.1
-    tailwind-merge: 2.5.2
-    tailwindcss: 3.4.10
-    tailwindcss-animate: 1.0.7
-    typescript: 5.7.3
-    usehooks-ts: 3.1.0
-    vaul: 1.1.2
-    zod: 3.24.2
-  languageName: unknown
-  linkType: soft
-
-"@microrealestate/tenantapi@workspace:services/tenantapi":
-  version: 0.0.0-use.local
-  resolution: "@microrealestate/tenantapi@workspace:services/tenantapi"
-  dependencies:
-    "@microrealestate/common": "*"
-    "@microrealestate/types": "*"
-    "@typescript-eslint/eslint-plugin": 7.15.0
-    "@typescript-eslint/parser": 7.15.0
-    eslint: 8.57.0
-    eslint-config-prettier: 9.1.0
-    eslint-plugin-import: 2.29.1
-    moment: 2.29.4
-    npm-run-all: 4.1.5
-    rimraf: 6.0.1
-    tsx: 3.14.0
-    typescript: 5.5.4
-  languageName: unknown
-  linkType: soft
-
-"@microrealestate/types@*, @microrealestate/types@workspace:types":
-  version: 0.0.0-use.local
-  resolution: "@microrealestate/types@workspace:types"
-  dependencies:
-    "@types/express": 4.17.20
-    "@typescript-eslint/eslint-plugin": 7.15.0
-    "@typescript-eslint/parser": 7.15.0
-    eslint: 8.57.0
-    eslint-config-prettier: 9.1.0
-    eslint-import-resolver-typescript: 3.6.1
-    eslint-plugin-import: 2.29.1
-    npm-run-all: 4.1.5
-    rimraf: 6.0.1
-    typescript: 5.5.4
-  languageName: unknown
-  linkType: soft
 
 "@mongodb-js/saslprep@npm:^1.1.0":
   version: 1.1.9
@@ -4696,6 +4248,447 @@ __metadata:
   checksum: 5dbe83531482e51e4f393992e533452745ef0885668a1a0d3949fa7c57f066258af488d898fd4f13dca5348b11678d615014b49652c5da1e806a1bc3a192044c
   languageName: node
   linkType: hard
+
+"@rentroo/api@workspace:services/api":
+  version: 0.0.0-use.local
+  resolution: "@rentroo/api@workspace:services/api"
+  dependencies:
+    "@rentroo/common": "*"
+    "@typescript-eslint/eslint-plugin": 7.15.0
+    "@typescript-eslint/parser": 7.15.0
+    axios: 1.8.4
+    eslint: 8.57.0
+    eslint-config-prettier: 9.1.0
+    eslint-plugin-import: 2.29.1
+    i18n: 0.13.3
+    jest: 29.7.0
+    json2csv: 5.0.6
+    jsonwebtoken: 9.0.0
+    lodash: 4.17.21
+    moment: 2.29.4
+    mongobackup: 0.3.5
+    nanoid: 5.1.0
+    nodemon: 3.1.4
+    npm-run-all: 4.1.5
+    rimraf: 6.0.1
+    supertest: 6.1.3
+    typescript: 5.5.4
+  languageName: unknown
+  linkType: soft
+
+"@rentroo/authenticator@workspace:services/authenticator":
+  version: 0.0.0-use.local
+  resolution: "@rentroo/authenticator@workspace:services/authenticator"
+  dependencies:
+    "@rentroo/common": "*"
+    "@typescript-eslint/eslint-plugin": 7.15.0
+    "@typescript-eslint/parser": 7.15.0
+    axios: 1.8.4
+    bcrypt: 5.1.1
+    eslint: 8.57.0
+    eslint-config-prettier: 9.1.0
+    eslint-plugin-import: 2.29.1
+    jsonwebtoken: 9.0.0
+    locale: 0.1.0
+    nanoid: 5.1.0
+    nodemon: 3.1.4
+    npm-run-all: 4.1.5
+    rimraf: 6.0.1
+    typescript: 5.5.4
+  languageName: unknown
+  linkType: soft
+
+"@rentroo/cli@workspace:cli":
+  version: 0.0.0-use.local
+  resolution: "@rentroo/cli@workspace:cli"
+  dependencies:
+    chalk: 4.1.2
+    clear: 0.1.0
+    dotenv: 16.0.1
+    dotenv-expand: 8.0.3
+    eslint: 8.57.0
+    eslint-config-prettier: 9.1.0
+    eslint-plugin-import: 2.29.1
+    figlet: 1.5.2
+    inquirer: 8.2.4
+    jest: 29.7.0
+    minimist: 1.2.6
+    moment: 2.29.4
+    which: 4.0.0
+  bin:
+    cli: src/index.js
+  languageName: unknown
+  linkType: soft
+
+"@rentroo/common@*, @rentroo/common@workspace:services/common":
+  version: 0.0.0-use.local
+  resolution: "@rentroo/common@workspace:services/common"
+  dependencies:
+    "@rentroo/types": "*"
+    "@types/bcrypt": 5.0.1
+    "@types/cookie-parser": 1.4.5
+    "@types/express": 4.17.20
+    "@types/jsonwebtoken": 9.0.4
+    "@types/lodash": 4.17.5
+    "@types/method-override": 0.0.34
+    "@typescript-eslint/eslint-plugin": 7.15.0
+    "@typescript-eslint/parser": 7.15.0
+    axios: 1.8.4
+    bcrypt: 5.1.1
+    cookie-parser: 1.4.7
+    eslint: 8.57.0
+    eslint-config-prettier: 9.1.0
+    eslint-plugin-import: 2.29.1
+    express: 4.21.1
+    express-mongo-sanitize: 2.2.0
+    express-winston: 4.2.0
+    jest: 29.7.0
+    jsonwebtoken: 9.0.0
+    lodash: 4.17.21
+    method-override: 3.0.0
+    mongoose: 6.13.6
+    npm-run-all: 4.1.5
+    redis: 4.6.10
+    rimraf: 6.0.1
+    typescript: 5.5.4
+    winston: 3.13.1
+  languageName: unknown
+  linkType: soft
+
+"@rentroo/commonui@*, @rentroo/commonui@workspace:webapps/commonui":
+  version: 0.0.0-use.local
+  resolution: "@rentroo/commonui@workspace:webapps/commonui"
+  dependencies:
+    "@babel/core": 7.21.3
+    "@material-ui/core": 4.12.4
+    "@material-ui/icons": 4.11.3
+    "@material-ui/pickers": 3.3.10
+    eslint: 8.57.0
+    eslint-config-prettier: 9.1.0
+    eslint-plugin-import: 2.29.1
+    eslint-plugin-react: 7.33.2
+    eslint-plugin-react-hooks: 4.6.0
+    formik: 2.2.9
+    moment: 2.29.4
+    next: 14.2.26
+    next-translate: 2.6.2
+    next-translate-plugin: 2.6.2
+    prop-types: 15.8.1
+    react: 18.2.0
+    react-dom: 18.2.0
+    require-from-string: 2.0.2
+  languageName: unknown
+  linkType: soft
+
+"@rentroo/desktop-app@workspace:desktop-app":
+  version: 0.0.0-use.local
+  resolution: "@rentroo/desktop-app@workspace:desktop-app"
+  dependencies:
+    "@playwright/test": ^1.42.1
+    better-sqlite3: ^9.4.1
+    chokidar: ^3.6.0
+    electron: 29.1.1
+    electron-builder: ^26.8.1
+    electron-rebuild: ^3.2.9
+    pdf-parse: ^1.1.1
+    recharts: ^2.12.2
+    tesseract.js: ^5.0.4
+    vitest: ^1.4.0
+    xlsx: ^0.18.5
+  languageName: unknown
+  linkType: soft
+
+"@rentroo/e2e@workspace:e2e":
+  version: 0.0.0-use.local
+  resolution: "@rentroo/e2e@workspace:e2e"
+  dependencies:
+    cypress: 14.4.1
+    dotenv: 16.0.1
+    dotenv-expand: 8.0.3
+    eslint: 8.57.0
+    eslint-config-prettier: 9.1.0
+    eslint-plugin-cypress: 2.15.1
+    eslint-plugin-import: 2.29.1
+    i18next: 21.8.14
+    moment: 2.29.4
+  languageName: unknown
+  linkType: soft
+
+"@rentroo/emailer@workspace:services/emailer":
+  version: 0.0.0-use.local
+  resolution: "@rentroo/emailer@workspace:services/emailer"
+  dependencies:
+    "@rentroo/common": "*"
+    "@typescript-eslint/eslint-plugin": 7.15.0
+    "@typescript-eslint/parser": 7.15.0
+    axios: 1.8.4
+    ejs: 3.1.10
+    eslint: 8.57.0
+    eslint-config-prettier: 9.1.0
+    eslint-plugin-import: 2.29.1
+    i18n: 0.14.2
+    jsonwebtoken: 9.0.0
+    locale: 0.1.0
+    moment: 2.29.4
+    nodemailer: 6.9.14
+    nodemailer-mailgun-transport: 2.1.5
+    nodemon: 3.1.4
+    npm-run-all: 4.1.5
+    rimraf: 6.0.1
+    typescript: 5.5.4
+  languageName: unknown
+  linkType: soft
+
+"@rentroo/gateway@workspace:services/gateway":
+  version: 0.0.0-use.local
+  resolution: "@rentroo/gateway@workspace:services/gateway"
+  dependencies:
+    "@rentroo/common": "*"
+    "@rentroo/types": "*"
+    "@types/cors": 2.8.15
+    axios: 1.8.4
+    cors: 2.8.5
+    eslint: 8.57.0
+    eslint-config-prettier: 9.1.0
+    eslint-plugin-import: 2.29.1
+    http-proxy-middleware: 2.0.7
+    npm-run-all: 4.1.5
+    rimraf: 6.0.1
+    tsx: 3.14.0
+    typescript: 5.5.4
+  languageName: unknown
+  linkType: soft
+
+"@rentroo/landlord@workspace:webapps/landlord":
+  version: 0.0.0-use.local
+  resolution: "@rentroo/landlord@workspace:webapps/landlord"
+  dependencies:
+    "@babel/core": 7.21.3
+    "@date-io/core": 1.3.13
+    "@date-io/moment": 1.3.13
+    "@material-ui/core": 4.12.4
+    "@material-ui/pickers": 3.3.10
+    "@radix-ui/react-avatar": 1.1.1
+    "@radix-ui/react-checkbox": 1.1.2
+    "@radix-ui/react-collapsible": 1.1.1
+    "@radix-ui/react-dialog": 1.1.2
+    "@radix-ui/react-label": 2.1.0
+    "@radix-ui/react-popover": 1.1.2
+    "@radix-ui/react-progress": 1.1.0
+    "@radix-ui/react-select": 2.1.2
+    "@radix-ui/react-separator": 1.1.0
+    "@radix-ui/react-slot": 1.1.0
+    "@radix-ui/react-switch": 1.1.1
+    "@radix-ui/react-tabs": 1.1.1
+    "@radix-ui/react-toggle": 1.1.0
+    "@radix-ui/react-toggle-group": 1.1.0
+    "@radix-ui/react-tooltip": 1.1.3
+    "@react-pdf-viewer/core": 3.12.0
+    "@react-pdf-viewer/default-layout": 3.12.0
+    "@react-pdf-viewer/full-screen": 3.12.0
+    "@react-pdf-viewer/print": 3.12.0
+    "@rentroo/commonui": "*"
+    "@tanstack/react-query": 5.29.0
+    "@tiptap/core": 2.6.6
+    "@tiptap/extension-placeholder": 2.6.6
+    "@tiptap/extension-superscript": 2.6.6
+    "@tiptap/extension-table": 2.6.6
+    "@tiptap/extension-table-cell": 2.6.6
+    "@tiptap/extension-table-header": 2.6.6
+    "@tiptap/extension-table-row": 2.6.6
+    "@tiptap/extension-text-align": 2.6.6
+    "@tiptap/extension-underline": 2.6.6
+    "@tiptap/pm": 2.6.6
+    "@tiptap/react": 2.6.6
+    "@tiptap/starter-kit": 2.6.6
+    "@types/lodash": 4.17.5
+    autoprefixer: 10.4.20
+    axios: 1.8.4
+    babel-loader: 8.2.5
+    class-variance-authority: 0.7.0
+    clsx: 2.1.0
+    currency-codes: 2.1.0
+    currency-symbol-map: 5.1.0
+    date-fns: 3.6.0
+    eslint: 8.57.0
+    eslint-config-next: 14.2.26
+    eslint-config-prettier: 9.1.0
+    eslint-plugin-import: 2.29.1
+    fdir: 5.2.0
+    formik: 2.2.9
+    jose: 4.15.5
+    js-file-download: 0.4.12
+    jsesc: 3.0.2
+    lodash: 4.17.21
+    material-ui-formik-components: 0.7.3
+    mobx: 6.12.3
+    mobx-react-lite: 3.4.3
+    moment: 2.29.4
+    nanoid: 5.1.0
+    next: 14.2.26
+    next-themes: 0.3.0
+    next-translate: 2.6.2
+    next-translate-plugin: 2.6.2
+    pdfjs-dist: 3.11.174
+    pigeon-maps: 0.21.3
+    postcss: 8.5.3
+    prop-types: 15.8.1
+    react: 18.2.0
+    react-awesome-lightbox: 1.8.1
+    react-day-picker: 8.10.0
+    react-dom: 18.2.0
+    react-icons: 5.3.0
+    recharts: 2.13.3
+    sonner: 1.4.41
+    tailwind-merge: 2.5.2
+    tailwindcss: 4.2.2
+    tailwindcss-animate: 1.0.7
+    usehooks-ts: 3.1.0
+    vaul: 0.9.0
+    yup: 0.32.11
+  languageName: unknown
+  linkType: soft
+
+"@rentroo/pdfgenerator@workspace:services/pdfgenerator":
+  version: 0.0.0-use.local
+  resolution: "@rentroo/pdfgenerator@workspace:services/pdfgenerator"
+  dependencies:
+    "@rentroo/common": "*"
+    "@typescript-eslint/eslint-plugin": 7.15.0
+    "@typescript-eslint/parser": 7.15.0
+    async-mutex: 0.5.0
+    aws-sdk: 2.1677.0
+    ejs: 3.1.10
+    eslint: 8.57.0
+    eslint-config-prettier: 9.1.0
+    eslint-plugin-import: 2.29.1
+    file-url: 3.0.0
+    fs-extra: 10.1.0
+    handlebars: 4.7.7
+    i18n: 0.14.2
+    jsonwebtoken: 9.0.0
+    locale: 0.1.0
+    moment: 2.29.4
+    multer: 1.4.5-lts.1
+    nodemon: 3.1.4
+    npm-run-all: 4.1.5
+    puppeteer: 23.2.1
+    rimraf: 6.0.1
+    sanitize-filename: 1.6.3
+    typescript: 5.5.4
+  languageName: unknown
+  linkType: soft
+
+"@rentroo/resetservice@workspace:services/resetservice":
+  version: 0.0.0-use.local
+  resolution: "@rentroo/resetservice@workspace:services/resetservice"
+  dependencies:
+    "@rentroo/common": "*"
+    "@rentroo/types": "*"
+    "@typescript-eslint/eslint-plugin": 7.15.0
+    "@typescript-eslint/parser": 7.15.0
+    eslint: 8.57.0
+    eslint-config-prettier: 9.1.0
+    eslint-plugin-import: 2.29.1
+    npm-run-all: 4.1.5
+    rimraf: 6.0.1
+    tsx: 3.14.0
+    typescript: 5.5.4
+  languageName: unknown
+  linkType: soft
+
+"@rentroo/tenant@workspace:webapps/tenant":
+  version: 0.0.0-use.local
+  resolution: "@rentroo/tenant@workspace:webapps/tenant"
+  dependencies:
+    "@formatjs/intl-localematcher": 0.4.2
+    "@hookform/resolvers": 3.3.2
+    "@radix-ui/react-avatar": 1.1.3
+    "@radix-ui/react-dialog": 1.1.6
+    "@radix-ui/react-hover-card": 1.1.6
+    "@radix-ui/react-label": 2.1.2
+    "@radix-ui/react-popover": 1.1.6
+    "@radix-ui/react-select": 2.1.6
+    "@radix-ui/react-separator": 1.1.2
+    "@radix-ui/react-slot": 1.1.2
+    "@radix-ui/react-toast": 1.2.6
+    "@radix-ui/react-tooltip": 1.1.8
+    "@rentroo/types": "*"
+    "@types/negotiator": 0.6.2
+    "@types/node": 22.13.5
+    "@types/react": 18.2.32
+    "@types/react-dom": 18.2.14
+    "@typescript-eslint/eslint-plugin": 7.15.0
+    "@typescript-eslint/parser": 7.15.0
+    autoprefixer: 10.4.20
+    axios: 1.8.4
+    class-variance-authority: 0.7.1
+    clsx: 2.1.1
+    date-fns: 2.30.0
+    eslint: 8.57.0
+    eslint-config-next: 14.2.26
+    eslint-config-prettier: 9.1.0
+    eslint-import-resolver-typescript: 3.6.1
+    eslint-plugin-import: 2.29.1
+    input-otp: 1.4.2
+    js-file-download: 0.4.12
+    lucide-react: 0.475.0
+    moment: 2.30.1
+    negotiator: 0.6.3
+    next: 14.2.26
+    next-runtime-env: 3.2.1
+    npm-run-all: 4.1.5
+    postcss: 8.5.3
+    react: 18.2.0
+    react-day-picker: 8.10.1
+    react-dom: 18.2.0
+    react-hook-form: 7.54.2
+    rimraf: 6.0.1
+    tailwind-merge: 2.5.2
+    tailwindcss: 4.2.2
+    tailwindcss-animate: 1.0.7
+    typescript: 5.7.3
+    usehooks-ts: 3.1.0
+    vaul: 1.1.2
+    zod: 3.24.2
+  languageName: unknown
+  linkType: soft
+
+"@rentroo/tenantapi@workspace:services/tenantapi":
+  version: 0.0.0-use.local
+  resolution: "@rentroo/tenantapi@workspace:services/tenantapi"
+  dependencies:
+    "@rentroo/common": "*"
+    "@rentroo/types": "*"
+    "@typescript-eslint/eslint-plugin": 7.15.0
+    "@typescript-eslint/parser": 7.15.0
+    eslint: 8.57.0
+    eslint-config-prettier: 9.1.0
+    eslint-plugin-import: 2.29.1
+    moment: 2.29.4
+    npm-run-all: 4.1.5
+    rimraf: 6.0.1
+    tsx: 3.14.0
+    typescript: 5.5.4
+  languageName: unknown
+  linkType: soft
+
+"@rentroo/types@*, @rentroo/types@workspace:types":
+  version: 0.0.0-use.local
+  resolution: "@rentroo/types@workspace:types"
+  dependencies:
+    "@types/express": 4.17.20
+    "@typescript-eslint/eslint-plugin": 7.15.0
+    "@typescript-eslint/parser": 7.15.0
+    eslint: 8.57.0
+    eslint-config-prettier: 9.1.0
+    eslint-import-resolver-typescript: 3.6.1
+    eslint-plugin-import: 2.29.1
+    npm-run-all: 4.1.5
+    rimraf: 6.0.1
+    typescript: 5.5.4
+  languageName: unknown
+  linkType: soft
 
 "@rollup/rollup-android-arm-eabi@npm:4.57.1":
   version: 4.57.1
@@ -7024,13 +7017,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"any-promise@npm:^1.0.0":
-  version: 1.3.0
-  resolution: "any-promise@npm:1.3.0"
-  checksum: 0ee8a9bdbe882c90464d75d1f55cf027f5458650c4bd1f0467e65aec38ccccda07ca5844969ee77ed46d04e7dded3eaceb027e8d32f385688523fe305fa7e1de
-  languageName: node
-  linkType: hard
-
 "anymatch@npm:^3.0.3, anymatch@npm:~3.1.2":
   version: 3.1.3
   resolution: "anymatch@npm:3.1.3"
@@ -7133,13 +7119,6 @@ __metadata:
     delegates: ^1.0.0
     readable-stream: ^3.6.0
   checksum: 52590c24860fa7173bedeb69a4c05fb573473e860197f618b9a28432ee4379049336727ae3a1f9c4cb083114601c1140cee578376164d0e651217a9843f9fe83
-  languageName: node
-  linkType: hard
-
-"arg@npm:^5.0.2":
-  version: 5.0.2
-  resolution: "arg@npm:5.0.2"
-  checksum: 6c69ada1a9943d332d9e5382393e897c500908d91d5cb735a01120d5f71daf1b339b7b8980cbeaba8fd1afc68e658a739746179e4315a26e8a28951ff9930078
   languageName: node
   linkType: hard
 
@@ -8115,13 +8094,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"camelcase-css@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "camelcase-css@npm:2.0.1"
-  checksum: 1cec2b3b3dcb5026688a470b00299a8db7d904c4802845c353dbd12d9d248d3346949a814d83bfd988d4d2e5b9904c07efe76fecd195a1d4f05b543e7c0b56b1
-  languageName: node
-  linkType: hard
-
 "camelcase@npm:^5.3.1":
   version: 5.3.1
   resolution: "camelcase@npm:5.3.1"
@@ -8245,7 +8217,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:^3.5.2, chokidar@npm:^3.5.3, chokidar@npm:^3.6.0":
+"chokidar@npm:^3.5.2, chokidar@npm:^3.6.0":
   version: 3.6.0
   resolution: "chokidar@npm:3.6.0"
   dependencies:
@@ -8628,13 +8600,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^4.0.0":
-  version: 4.1.1
-  resolution: "commander@npm:4.1.1"
-  checksum: d7b9913ff92cae20cb577a4ac6fcc121bd6223319e54a40f51a14740a681ad5c574fd29a57da478a5f234a6fa6c52cbf0b7c641353e03c648b1ae85ba670b977
-  languageName: node
-  linkType: hard
-
 "commander@npm:^5.0.0":
   version: 5.1.0
   resolution: "commander@npm:5.1.0"
@@ -8900,15 +8865,6 @@ __metadata:
     "@babel/runtime": ^7.8.3
     is-in-browser: ^1.0.2
   checksum: 647cd4ea5e401c65c59376255aa2b708e92bf84fba9ce2b3ff5ecb94bf51d74ac374052b1cf9956ef7419b8ebf07fcea9a7683d2d2459127b2ca747ab5b98745
-  languageName: node
-  linkType: hard
-
-"cssesc@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "cssesc@npm:3.0.0"
-  bin:
-    cssesc: bin/cssesc
-  checksum: f8c4ababffbc5e2ddf2fa9957dda1ee4af6048e22aeda1869d0d00843223c1b13ad3f5d88b51caa46c994225eacb636b764eb807a8883e2fb6f99b4f4e8c48b2
   languageName: node
   linkType: hard
 
@@ -9419,13 +9375,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"didyoumean@npm:^1.2.2":
-  version: 1.2.2
-  resolution: "didyoumean@npm:1.2.2"
-  checksum: d5d98719d58b3c2fa59663c4c42ba9716f1fd01245c31d5fce31915bd3aa26e6aac149788e007358f778ebbd68a2256eb5973e8ca6f221df221ba060115acf2e
-  languageName: node
-  linkType: hard
-
 "diff-sequences@npm:^29.6.3":
   version: 29.6.3
   resolution: "diff-sequences@npm:29.6.3"
@@ -9449,13 +9398,6 @@ __metadata:
   dependencies:
     path-type: ^4.0.0
   checksum: fa05e18324510d7283f55862f3161c6759a3f2f8dbce491a2fc14c8324c498286c54282c1f0e933cb930da8419b30679389499b919122952a4f8592362ef4615
-  languageName: node
-  linkType: hard
-
-"dlv@npm:^1.1.3":
-  version: 1.1.3
-  resolution: "dlv@npm:1.1.3"
-  checksum: d7381bca22ed11933a1ccf376db7a94bee2c57aa61e490f680124fa2d1cd27e94eba641d9f45be57caab4f9a6579de0983466f620a2cd6230d7ec93312105ae7
   languageName: node
   linkType: hard
 
@@ -10795,7 +10737,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.0, fast-glob@npm:^3.3.1, fast-glob@npm:^3.3.2":
+"fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.1, fast-glob@npm:^3.3.2":
   version: 3.3.2
   resolution: "fast-glob@npm:3.3.2"
   dependencies:
@@ -13294,15 +13236,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jiti@npm:^1.21.0":
-  version: 1.21.6
-  resolution: "jiti@npm:1.21.6"
-  bin:
-    jiti: bin/jiti.js
-  checksum: 9ea4a70a7bb950794824683ed1c632e2ede26949fbd348e2ba5ec8dc5efa54dc42022d85ae229cadaa60d4b95012e80ea07d625797199b688cc22ab0e8891d32
-  languageName: node
-  linkType: hard
-
 "jiti@npm:^2.4.2":
   version: 2.6.1
   resolution: "jiti@npm:2.6.1"
@@ -13724,20 +13657,6 @@ __metadata:
     prelude-ls: ^1.2.1
     type-check: ~0.4.0
   checksum: 12c5021c859bd0f5248561bf139121f0358285ec545ebf48bb3d346820d5c61a4309535c7f387ed7d84361cf821e124ce346c6b7cef8ee09a67c1473b46d0fc4
-  languageName: node
-  linkType: hard
-
-"lilconfig@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "lilconfig@npm:2.1.0"
-  checksum: 8549bb352b8192375fed4a74694cd61ad293904eee33f9d4866c2192865c44c4eb35d10782966242634e0cbc1e91fe62b1247f148dc5514918e3a966da7ea117
-  languageName: node
-  linkType: hard
-
-"lilconfig@npm:^3.0.0":
-  version: 3.1.2
-  resolution: "lilconfig@npm:3.1.2"
-  checksum: 4e8b83ddd1d0ad722600994e6ba5d858ddca14f0587aa6b9c8185e17548149b5e13d4d583d811e9e9323157fa8c6a527e827739794c7502b59243c58e210b8c3
   languageName: node
   linkType: hard
 
@@ -14375,7 +14294,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"micromatch@npm:^4.0.2, micromatch@npm:^4.0.4, micromatch@npm:^4.0.5, micromatch@npm:^4.0.8":
+"micromatch@npm:^4.0.2, micromatch@npm:^4.0.4, micromatch@npm:^4.0.8":
   version: 4.0.8
   resolution: "micromatch@npm:4.0.8"
   dependencies:
@@ -14865,17 +14784,6 @@ __metadata:
   version: 0.0.8
   resolution: "mute-stream@npm:0.0.8"
   checksum: ff48d251fc3f827e5b1206cda0ffdaec885e56057ee86a3155e1951bc940fd5f33531774b1cc8414d7668c10a8907f863f6561875ee6e8768931a62121a531a1
-  languageName: node
-  linkType: hard
-
-"mz@npm:^2.7.0":
-  version: 2.7.0
-  resolution: "mz@npm:2.7.0"
-  dependencies:
-    any-promise: ^1.0.0
-    object-assign: ^4.0.1
-    thenify-all: ^1.0.0
-  checksum: 8427de0ece99a07e9faed3c0c6778820d7543e3776f9a84d22cf0ec0a8eb65f6e9aee9c9d353ff9a105ff62d33a9463c6ca638974cc652ee8140cd1e35951c87
   languageName: node
   linkType: hard
 
@@ -15468,17 +15376,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"object-assign@npm:^4, object-assign@npm:^4.0.1, object-assign@npm:^4.1.1":
+"object-assign@npm:^4, object-assign@npm:^4.1.1":
   version: 4.1.1
   resolution: "object-assign@npm:4.1.1"
   checksum: fcc6e4ea8c7fe48abfbb552578b1c53e0d194086e2e6bbbf59e0a536381a292f39943c6e9628af05b5528aa5e3318bb30d6b2e53cadaf5b8fe9e12c4b69af23f
-  languageName: node
-  linkType: hard
-
-"object-hash@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "object-hash@npm:3.0.0"
-  checksum: 80b4904bb3857c52cc1bfd0b52c0352532ca12ed3b8a6ff06a90cd209dfda1b95cee059a7625eb9da29537027f68ac4619363491eedb2f5d3dddbba97494fd6c
   languageName: node
   linkType: hard
 
@@ -16022,7 +15923,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pify@npm:^2.2.0, pify@npm:^2.3.0":
+"pify@npm:^2.2.0":
   version: 2.3.0
   resolution: "pify@npm:2.3.0"
   checksum: 9503aaeaf4577acc58642ad1d25c45c6d90288596238fb68f82811c08104c800e5a7870398e9f015d82b44ecbcbef3dc3d4251a1cbb582f6e5959fe09884b2ba
@@ -16045,7 +15946,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pirates@npm:^4.0.1, pirates@npm:^4.0.4":
+"pirates@npm:^4.0.4":
   version: 4.0.6
   resolution: "pirates@npm:4.0.6"
   checksum: 46a65fefaf19c6f57460388a5af9ab81e3d7fd0e7bc44ca59d753cb5c4d0df97c6c6e583674869762101836d68675f027d60f841c105d72734df9dfca97cbcc6
@@ -16121,70 +16022,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-import@npm:^15.1.0":
-  version: 15.1.0
-  resolution: "postcss-import@npm:15.1.0"
-  dependencies:
-    postcss-value-parser: ^4.0.0
-    read-cache: ^1.0.0
-    resolve: ^1.1.7
-  peerDependencies:
-    postcss: ^8.0.0
-  checksum: 7bd04bd8f0235429009d0022cbf00faebc885de1d017f6d12ccb1b021265882efc9302006ba700af6cab24c46bfa2f3bc590be3f9aee89d064944f171b04e2a3
-  languageName: node
-  linkType: hard
-
-"postcss-js@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "postcss-js@npm:4.0.1"
-  dependencies:
-    camelcase-css: ^2.0.1
-  peerDependencies:
-    postcss: ^8.4.21
-  checksum: 5c1e83efeabeb5a42676193f4357aa9c88f4dc1b3c4a0332c132fe88932b33ea58848186db117cf473049fc233a980356f67db490bd0a7832ccba9d0b3fd3491
-  languageName: node
-  linkType: hard
-
-"postcss-load-config@npm:^4.0.1":
-  version: 4.0.2
-  resolution: "postcss-load-config@npm:4.0.2"
-  dependencies:
-    lilconfig: ^3.0.0
-    yaml: ^2.3.4
-  peerDependencies:
-    postcss: ">=8.0.9"
-    ts-node: ">=9.0.0"
-  peerDependenciesMeta:
-    postcss:
-      optional: true
-    ts-node:
-      optional: true
-  checksum: 7c27dd3801db4eae207a5116fed2db6b1ebb780b40c3dd62a3e57e087093a8e6a14ee17ada729fee903152d6ef4826c6339eb135bee6208e0f3140d7e8090185
-  languageName: node
-  linkType: hard
-
-"postcss-nested@npm:^6.0.1":
-  version: 6.2.0
-  resolution: "postcss-nested@npm:6.2.0"
-  dependencies:
-    postcss-selector-parser: ^6.1.1
-  peerDependencies:
-    postcss: ^8.2.14
-  checksum: 2c86ecf2d0ce68f27c87c7e24ae22dc6dd5515a89fcaf372b2627906e11f5c1f36e4a09e4c15c20fd4a23d628b3d945c35839f44496fbee9a25866258006671b
-  languageName: node
-  linkType: hard
-
-"postcss-selector-parser@npm:^6.0.11, postcss-selector-parser@npm:^6.1.1":
-  version: 6.1.2
-  resolution: "postcss-selector-parser@npm:6.1.2"
-  dependencies:
-    cssesc: ^3.0.0
-    util-deprecate: ^1.0.2
-  checksum: ce9440fc42a5419d103f4c7c1847cb75488f3ac9cbe81093b408ee9701193a509f664b4d10a2b4d82c694ee7495e022f8f482d254f92b7ffd9ed9dea696c6f84
-  languageName: node
-  linkType: hard
-
-"postcss-value-parser@npm:^4.0.0, postcss-value-parser@npm:^4.2.0":
+"postcss-value-parser@npm:^4.2.0":
   version: 4.2.0
   resolution: "postcss-value-parser@npm:4.2.0"
   checksum: 819ffab0c9d51cf0acbabf8996dffbfafbafa57afc0e4c98db88b67f2094cb44488758f06e5da95d7036f19556a4a732525e84289a425f4f6fd8e412a9d7442f
@@ -16210,17 +16048,6 @@ __metadata:
     picocolors: ^1.1.1
     source-map-js: ^1.2.1
   checksum: da574620eb84ff60e65e1d8fc6bd5ad87a19101a23d0aba113c653434161543918229a0f673d89efb3b6d4906287eb04b957310dbcf4cbebacad9d1312711461
-  languageName: node
-  linkType: hard
-
-"postcss@npm:^8.4.23":
-  version: 8.4.47
-  resolution: "postcss@npm:8.4.47"
-  dependencies:
-    nanoid: ^3.3.7
-    picocolors: ^1.1.0
-    source-map-js: ^1.2.1
-  checksum: f78440a9d8f97431dd2ab1ab8e1de64f12f3eff38a3d8d4a33919b96c381046a314658d2de213a5fa5eb296b656de76a3ec269fdea27f16d5ab465b916a0f52c
   languageName: node
   linkType: hard
 
@@ -17046,15 +16873,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"read-cache@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "read-cache@npm:1.0.0"
-  dependencies:
-    pify: ^2.3.0
-  checksum: cffc728b9ede1e0667399903f9ecaf3789888b041c46ca53382fa3a06303e5132774dc0a96d0c16aa702dbac1ea0833d5a868d414f5ab2af1e1438e19e6657c6
-  languageName: node
-  linkType: hard
-
 "read-pkg@npm:^3.0.0":
   version: 3.0.0
   resolution: "read-pkg@npm:3.0.0"
@@ -17216,9 +17034,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rental-app@workspace:.":
+"rentroo@workspace:.":
   version: 0.0.0-use.local
-  resolution: "rental-app@workspace:."
+  resolution: "rentroo@workspace:."
   dependencies:
     cross-env: 7.0.3
     husky: 9.1.7
@@ -17310,7 +17128,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve@npm:^1.1.7, resolve@npm:^1.10.0, resolve@npm:^1.20.0, resolve@npm:^1.22.2, resolve@npm:^1.22.4":
+"resolve@npm:^1.10.0, resolve@npm:^1.20.0, resolve@npm:^1.22.4":
   version: 1.22.8
   resolution: "resolve@npm:1.22.8"
   dependencies:
@@ -17336,7 +17154,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve@patch:resolve@^1.1.7#~builtin<compat/resolve>, resolve@patch:resolve@^1.10.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.20.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.2#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.4#~builtin<compat/resolve>":
+"resolve@patch:resolve@^1.10.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.20.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.4#~builtin<compat/resolve>":
   version: 1.22.8
   resolution: "resolve@patch:resolve@npm%3A1.22.8#~builtin<compat/resolve>::version=1.22.8&hash=c3c19d"
   dependencies:
@@ -18572,24 +18390,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sucrase@npm:^3.32.0":
-  version: 3.35.0
-  resolution: "sucrase@npm:3.35.0"
-  dependencies:
-    "@jridgewell/gen-mapping": ^0.3.2
-    commander: ^4.0.0
-    glob: ^10.3.10
-    lines-and-columns: ^1.1.6
-    mz: ^2.7.0
-    pirates: ^4.0.1
-    ts-interface-checker: ^0.1.9
-  bin:
-    sucrase: bin/sucrase
-    sucrase-node: bin/sucrase-node
-  checksum: 9fc5792a9ab8a14dcf9c47dcb704431d35c1cdff1d17d55d382a31c2e8e3063870ad32ce120a80915498486246d612e30cda44f1624d9d9a10423e1a43487ad1
-  languageName: node
-  linkType: hard
-
 "sumchecker@npm:^3.0.1":
   version: 3.0.1
   resolution: "sumchecker@npm:3.0.1"
@@ -18678,36 +18478,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:3.4.10":
-  version: 3.4.10
-  resolution: "tailwindcss@npm:3.4.10"
-  dependencies:
-    "@alloc/quick-lru": ^5.2.0
-    arg: ^5.0.2
-    chokidar: ^3.5.3
-    didyoumean: ^1.2.2
-    dlv: ^1.1.3
-    fast-glob: ^3.3.0
-    glob-parent: ^6.0.2
-    is-glob: ^4.0.3
-    jiti: ^1.21.0
-    lilconfig: ^2.1.0
-    micromatch: ^4.0.5
-    normalize-path: ^3.0.0
-    object-hash: ^3.0.0
-    picocolors: ^1.0.0
-    postcss: ^8.4.23
-    postcss-import: ^15.1.0
-    postcss-js: ^4.0.1
-    postcss-load-config: ^4.0.1
-    postcss-nested: ^6.0.1
-    postcss-selector-parser: ^6.0.11
-    resolve: ^1.22.2
-    sucrase: ^3.32.0
-  bin:
-    tailwind: lib/cli.js
-    tailwindcss: lib/cli.js
-  checksum: aa8db3514ec5110b2dee0bf5b35b84ebedf0c23a0dcafc870a5176bc2bad7d581956e0692ed6d888d602c114d2c54d7aa8fdb7028456880bd28b326078c8ba6e
+"tailwindcss@npm:4.2.2":
+  version: 4.2.2
+  resolution: "tailwindcss@npm:4.2.2"
+  checksum: 708b4f878b95f3bf44955bd1bcb047f7288775aeac90ac71898d89aeada351848d3efbb66c5eeb479c825bec03665a655f2cd1255c79622eba1f2925047971da
   languageName: node
   linkType: hard
 
@@ -18837,24 +18611,6 @@ __metadata:
   version: 0.2.0
   resolution: "text-table@npm:0.2.0"
   checksum: b6937a38c80c7f84d9c11dd75e49d5c44f71d95e810a3250bd1f1797fc7117c57698204adf676b71497acc205d769d65c16ae8fa10afad832ae1322630aef10a
-  languageName: node
-  linkType: hard
-
-"thenify-all@npm:^1.0.0":
-  version: 1.6.0
-  resolution: "thenify-all@npm:1.6.0"
-  dependencies:
-    thenify: ">= 3.1.0 < 4"
-  checksum: dba7cc8a23a154cdcb6acb7f51d61511c37a6b077ec5ab5da6e8b874272015937788402fd271fdfc5f187f8cb0948e38d0a42dcc89d554d731652ab458f5343e
-  languageName: node
-  linkType: hard
-
-"thenify@npm:>= 3.1.0 < 4":
-  version: 3.3.1
-  resolution: "thenify@npm:3.3.1"
-  dependencies:
-    any-promise: ^1.0.0
-  checksum: 84e1b804bfec49f3531215f17b4a6e50fd4397b5f7c1bccc427b9c656e1ecfb13ea79d899930184f78bc2f57285c54d9a50a590c8868f4f0cef5c1d9f898b05e
   languageName: node
   linkType: hard
 
@@ -19089,13 +18845,6 @@ __metadata:
   peerDependencies:
     typescript: ">=4.8.4"
   checksum: 5b1ef89105654d93d67582308bd8dfe4bbf6874fccbcaa729b08fbb00a940fd4c691ca6d0d2b18c3c70878d9a7e503421b7cc473dbc3d0d54258b86401d4b15d
-  languageName: node
-  linkType: hard
-
-"ts-interface-checker@npm:^0.1.9":
-  version: 0.1.13
-  resolution: "ts-interface-checker@npm:0.1.13"
-  checksum: 20c29189c2dd6067a8775e07823ddf8d59a33e2ffc47a1bd59a5cb28bb0121a2969a816d5e77eda2ed85b18171aa5d1c4005a6b88ae8499ec7cc49f78571cb5e
   languageName: node
   linkType: hard
 
@@ -19589,7 +19338,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"util-deprecate@npm:^1.0.1, util-deprecate@npm:^1.0.2, util-deprecate@npm:~1.0.1":
+"util-deprecate@npm:^1.0.1, util-deprecate@npm:~1.0.1":
   version: 1.0.2
   resolution: "util-deprecate@npm:1.0.2"
   checksum: 474acf1146cb2701fe3b074892217553dfcf9a031280919ba1b8d651a068c9b15d863b7303cb15bd00a862b498e6cf4ad7b4a08fb134edd5a6f7641681cb54a2
@@ -20232,15 +19981,6 @@ __metadata:
   version: 5.0.0
   resolution: "yallist@npm:5.0.0"
   checksum: eba51182400b9f35b017daa7f419f434424410691bbc5de4f4240cc830fdef906b504424992700dc047f16b4d99100a6f8b8b11175c193f38008e9c96322b6a5
-  languageName: node
-  linkType: hard
-
-"yaml@npm:^2.3.4":
-  version: 2.6.0
-  resolution: "yaml@npm:2.6.0"
-  bin:
-    yaml: bin.mjs
-  checksum: e5e74fd75e01bde2c09333d529af9fbb5928c5f7f01bfdefdcb2bf753d4ef489a45cab4deac01c9448f55ca27e691612b81fe3c3a59bb8cb5b0069da0f92cf0b
   languageName: node
   linkType: hard
 
