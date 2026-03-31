@@ -8,6 +8,7 @@ import _cookieParser from 'cookie-parser';
 import _methodOverride from 'method-override';
 import EnvironmentConfig from './environmentconfig.js';
 import Express from 'express';
+import expressRateLimit from 'express-rate-limit';
 import expressWinston from 'express-winston';
 import httpInterceptors from './httpinterceptors.js';
 import jwt from 'jsonwebtoken';
@@ -93,6 +94,16 @@ export default class Service {
     }
 
     if (this.useRequestParsers) {
+      // Rate limiting - security fix for CWE-307
+      const limiter = expressRateLimit({
+        windowMs: 15 * 60 * 1000, // 15 minutes
+        max: 100, // limit each IP to 100 requests per windowMs
+        standardHeaders: true,
+        legacyHeaders: false,
+        message: { error: 'Too many requests, please try again later.' }
+      });
+      this.expressServer.use(limiter);
+
       this.expressServer.use(_cookieParser());
       this.expressServer.use(Express.urlencoded({ extended: true }));
       this.expressServer.use(Express.json());
