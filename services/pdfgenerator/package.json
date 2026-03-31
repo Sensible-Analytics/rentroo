@@ -36,7 +36,7 @@
     "async-mutex": "0.5.0",
     "aws-sdk": "2.1677.0",
     "ejs": "3.1.10",
-    "file-url": "3.0.0",
+    "file-url": "4.0.0",
     "fs-extra": "10.1.0",
     "handlebars": "4.7.7",
     "i18n": "0.14.2",
