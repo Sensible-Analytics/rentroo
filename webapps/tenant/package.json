@@ -44,7 +44,7 @@
     "react-hook-form": "7.54.2",
     "usehooks-ts": "3.1.0",
     "vaul": "1.1.2",
-    "zod": "3.24.2"
+    "zod": "4.3.6"
   },
   "devDependencies": {
     "@rentroo/types": "*",
