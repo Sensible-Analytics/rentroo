@@ -12,8 +12,8 @@
   "framework": "nextjs",
   "env": {
     "NEXT_PUBLIC_APP_NAME": "Rentro",
-    "NEXT_PUBLIC_GATEWAY_URL": "https://api.rentroo.app",
-    "NEXT_PUBLIC_BASE_PATH": ""
+    "NEXT_PUBLIC_GATEWAY_URL": "https://api.rentroo.sensibleanalytics.co",
+    "NEXT_PUBLIC_BASE_PATH": "/landlord"
   },
   "regions": ["syd1"],
   "headers": [

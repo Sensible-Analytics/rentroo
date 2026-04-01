@@ -1,0 +1,289 @@
+# Render Blueprint for Rentroo services
+# This file defines all backend services for deployment on Render.
+# Use: Import this file in Render Dashboard or use Render CLI.
+
+services:
+  # Gateway Service - critical, must stay awake
+  - type: web
+    name: rentroo-gateway
+    runtime: docker
+    dockerfilePath: services/gateway/Dockerfile
+    dockerContext: .
+    plan: starter # $7/month for unlimited hours, or free with 750 hours limit
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 8080
+      - key: EXPOSE_FRONTENDS
+        value: 'true'
+      - key: AUTHENTICATOR_URL
+        fromService:
+          name: rentroo-authenticator
+          property: host
+      - key: API_URL
+        fromService:
+          name: rentroo-api
+          property: host
+        sync: false
+      - key: PDFGENERATOR_URL
+        fromService:
+          name: rentroo-pdfgenerator
+          property: host
+        sync: false
+      - key: EMAILER_URL
+        fromService:
+          name: rentroo-emailer
+          property: host
+        sync: false
+      - key: LANDLORD_FRONTEND_URL
+        value: https://landlord.rentroo.sensibleanalytics.co
+      - key: LANDLORD_BASE_PATH
+        value: /landlord
+      - key: TENANT_FRONTEND_URL
+        value: https://tenant.rentroo.sensibleanalytics.co
+      - key: TENANT_BASE_PATH
+        value: /tenant
+      - key: APP_DOMAIN
+        value: api.rentroo.sensibleanalytics.co
+      - key: CORS_ENABLED
+        value: 'true'
+      - key: ALLOWED_ORIGINS
+        value: https://landlord.rentroo.sensibleanalytics.co,https://tenant.rentroo.sensibleanalytics.co
+      - key: TENANTAPI_URL
+        fromService:
+          name: rentroo-tenantapi
+          property: host
+        sync: false
+      # Secrets - fill these in Render Dashboard
+      - key: REDIS_URL
+        sync: false
+      - key: REDIS_PASSWORD
+        sync: false
+      - key: ACCESS_TOKEN_SECRET
+        generateValue: true
+      - key: REFRESH_TOKEN_SECRET
+        generateValue: true
+      - key: RESET_TOKEN_SECRET
+        generateValue: true
+      - key: APPCREDZ_TOKEN_SECRET
+        generateValue: true
+      - key: MONGO_URL
+        sync: false
+
+  # API Service
+  - type: web
+    name: rentroo-api
+    runtime: docker
+    dockerfilePath: services/api/Dockerfile
+    dockerContext: .
+    plan: starter # $7/month
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 8200
+      - key: LOGGER_LEVEL
+        value: info
+      - key: MONGO_URL
+        sync: false
+      - key: EMAILER_URL
+        fromService:
+          name: rentroo-emailer
+          property: host
+        sync: false
+      - key: PDFGENERATOR_URL
+        fromService:
+          name: rentroo-pdfgenerator
+          property: host
+        sync: false
+      - key: RESTORE_DB
+        value: 'false'
+      - key: ACCESS_TOKEN_SECRET
+        generateValue: true
+      - key: CIPHER_KEY
+        generateValue: true
+      - key: CIPHER_IV_KEY
+        generateValue: true
+
+  # Authenticator Service
+  - type: web
+    name: rentroo-authenticator
+    runtime: docker
+    dockerfilePath: services/authenticator/Dockerfile
+    dockerContext: .
+    plan: starter # $7/month
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 8000
+      - key: LOGGER_LEVEL
+        value: info
+      - key: REDIS_URL
+        sync: false
+      - key: REDIS_PASSWORD
+        sync: false
+      - key: ACCESS_TOKEN_SECRET
+        generateValue: true
+      - key: REFRESH_TOKEN_SECRET
+        generateValue: true
+      - key: RESET_TOKEN_SECRET
+        generateValue: true
+      - key: APPCREDZ_TOKEN_SECRET
+        generateValue: true
+      - key: MONGO_URL
+        sync: false
+      - key: EMAILER_URL
+        fromService:
+          name: rentroo-emailer
+          property: host
+        sync: false
+      - key: SIGNUP
+        value: 'true'
+      - key: APP_DOMAIN
+        value: api.rentroo.sensibleanalytics.co
+      - key: APP_PROTOCOL
+        value: https
+
+  # TenantAPI Service
+  - type: web
+    name: rentroo-tenantapi
+    runtime: docker
+    dockerfilePath: services/tenantapi/Dockerfile
+    dockerContext: .
+    plan: starter # $7/month
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 8250
+      - key: LOGGER_LEVEL
+        value: info
+      - key: MONGO_URL
+        sync: false
+      - key: ACCESS_TOKEN_SECRET
+        generateValue: true
+
+  # Emailer Service
+  - type: web
+    name: rentroo-emailer
+    runtime: docker
+    dockerfilePath: services/emailer/Dockerfile
+    dockerContext: .
+    plan: free # Can sleep when not needed
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ALLOW_SENDING_EMAILS
+        value: 'true'
+      - key: PORT
+        value: 8400
+      - key: LOGGER_LEVEL
+        value: info
+      - key: LANDLORD_APP_URL
+        value: https://landlord.rentroo.sensibleanalytics.co
+      - key: TENANT_APP_URL
+        value: https://tenant.rentroo.sensibleanalytics.co
+      - key: MONGO_URL
+        sync: false
+      - key: ACCESS_TOKEN_SECRET
+        generateValue: true
+      - key: CIPHER_KEY
+        generateValue: true
+      - key: CIPHER_IV_KEY
+        generateValue: true
+      - key: PDFGENERATOR_URL
+        fromService:
+          name: rentroo-pdfgenerator
+          property: host
+        sync: false
+      # Email service configuration (choose one)
+      - key: GMAIL_EMAIL
+        sync: false
+      - key: GMAIL_APP_PASSWORD
+        sync: false
+      - key: MAILGUN_API_KEY
+        sync: false
+      - key: MAILGUN_DOMAIN
+        sync: false
+      - key: SMTP_SERVER
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_SECURE
+        sync: false
+      - key: SMTP_USERNAME
+        sync: false
+      - key: SMTP_PASSWORD
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+      - key: EMAIL_REPLY_TO
+        sync: false
+      - key: EMAIL_BCC
+        sync: false
+
+  # PDFGenerator Service
+  - type: web
+    name: rentroo-pdfgenerator
+    runtime: docker
+    dockerfilePath: services/pdfgenerator/Dockerfile
+    dockerContext: .
+    plan: free # Can sleep when not needed
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 8300
+      - key: LOGGER_LEVEL
+        value: info
+      - key: MONGO_URL
+        sync: false
+      - key: ACCESS_TOKEN_SECRET
+        generateValue: true
+      - key: CIPHER_KEY
+        generateValue: true
+      - key: CIPHER_IV_KEY
+        generateValue: true
+      - key: UPLOAD_MAX_SIZE
+        value: 2000000000
+
+  # Resetservice Service
+  - type: web
+    name: rentroo-resetservice
+    runtime: docker
+    dockerfilePath: services/resetservice/Dockerfile
+    dockerContext: .
+    plan: free # Can sleep when not needed
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 8900
+      - key: LOGGER_LEVEL
+        value: info
+      - key: MONGO_URL
+        sync: false
+      - key: ACCESS_TOKEN_SECRET
+        generateValue: true
+      - key: EMAILER_URL
+        fromService:
+          name: rentroo-emailer
+          property: host
+        sync: false
+      - key: APP_DOMAIN
+        value: api.rentroo.sensibleanalytics.co
+      - key: APP_PROTOCOL
+        value: https
+# External databases (not managed by Render)
+# MongoDB Atlas - set MONGO_URL secret
+# Redis (Upstash) - set REDIS_URL and REDIS_PASSWORD secrets
+# Clerk - set CLERK_SECRET_KEY, CLERK_PUBLISHABLE_KEY
+# Resend - set RESEND_API_KEY
+# Cloudflare R2 - set R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET_NAME
