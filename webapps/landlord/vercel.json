@@ -1,7 +1,7 @@
 {
   "version": 2,
   "name": "rentroo-landlord",
-  "packageManager": "yarn",
+
   "installCommand": "cd ../.. && yarn install --frozen-lockfile",
   "buildCommand": "cd ../.. && yarn build && cd webapps/landlord && yarn build",
   "outputDirectory": ".next",

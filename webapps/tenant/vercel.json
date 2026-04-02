@@ -1,7 +1,7 @@
 {
   "version": 2,
   "name": "rentrooo-tenant",
-  "packageManager": "yarn",
+
   "installCommand": "cd ../.. && yarn install --frozen-lockfile",
   "buildCommand": "cd ../.. && yarn build && cd webapps/tenant && yarn build",
   "outputDirectory": ".next",
