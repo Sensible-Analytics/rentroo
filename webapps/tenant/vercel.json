@@ -7,7 +7,8 @@
       "use": "@vercel/next"
     }
   ],
-  "buildCommand": "cd ../.. && yarn install && yarn build && cd webapps/tenant && yarn build",
+  "installCommand": "cd ../.. && yarn install --frozen-lockfile",
+  "buildCommand": "cd ../.. && yarn build && cd webapps/tenant && yarn build",
   "outputDirectory": ".next",
   "framework": "nextjs",
   "env": {

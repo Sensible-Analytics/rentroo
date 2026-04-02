@@ -9,7 +9,7 @@ services:
     runtime: docker
     dockerfilePath: services/gateway/Dockerfile
     dockerContext: .
-    plan: starter # $7/month for unlimited hours, or free with 750 hours limit
+    plan: free # $7/month for unlimited hours, or free with 750 hours limit
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
@@ -20,23 +20,24 @@ services:
         value: 'true'
       - key: AUTHENTICATOR_URL
         fromService:
+          type: web
           name: rentroo-authenticator
           property: host
       - key: API_URL
         fromService:
+          type: web
           name: rentroo-api
           property: host
-        sync: false
       - key: PDFGENERATOR_URL
         fromService:
+          type: web
           name: rentroo-pdfgenerator
           property: host
-        sync: false
       - key: EMAILER_URL
         fromService:
+          type: web
           name: rentroo-emailer
           property: host
-        sync: false
       - key: LANDLORD_FRONTEND_URL
         value: https://landlord.rentroo.sensibleanalytics.co
       - key: LANDLORD_BASE_PATH
@@ -53,9 +54,9 @@ services:
         value: https://landlord.rentroo.sensibleanalytics.co,https://tenant.rentroo.sensibleanalytics.co
       - key: TENANTAPI_URL
         fromService:
+          type: web
           name: rentroo-tenantapi
           property: host
-        sync: false
       # Secrets - fill these in Render Dashboard
       - key: REDIS_URL
         sync: false
@@ -78,7 +79,7 @@ services:
     runtime: docker
     dockerfilePath: services/api/Dockerfile
     dockerContext: .
-    plan: starter # $7/month
+    plan: free # $7/month
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
@@ -91,14 +92,14 @@ services:
         sync: false
       - key: EMAILER_URL
         fromService:
+          type: web
           name: rentroo-emailer
           property: host
-        sync: false
       - key: PDFGENERATOR_URL
         fromService:
+          type: web
           name: rentroo-pdfgenerator
           property: host
-        sync: false
       - key: RESTORE_DB
         value: 'false'
       - key: ACCESS_TOKEN_SECRET
@@ -114,7 +115,7 @@ services:
     runtime: docker
     dockerfilePath: services/authenticator/Dockerfile
     dockerContext: .
-    plan: starter # $7/month
+    plan: free # $7/month
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
@@ -139,9 +140,9 @@ services:
         sync: false
       - key: EMAILER_URL
         fromService:
+          type: web
           name: rentroo-emailer
           property: host
-        sync: false
       - key: SIGNUP
         value: 'true'
       - key: APP_DOMAIN
@@ -155,7 +156,7 @@ services:
     runtime: docker
     dockerfilePath: services/tenantapi/Dockerfile
     dockerContext: .
-    plan: starter # $7/month
+    plan: free # $7/month
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
@@ -199,9 +200,9 @@ services:
         generateValue: true
       - key: PDFGENERATOR_URL
         fromService:
+          type: web
           name: rentroo-pdfgenerator
           property: host
-        sync: false
       # Email service configuration (choose one)
       - key: GMAIL_EMAIL
         sync: false
@@ -274,9 +275,9 @@ services:
         generateValue: true
       - key: EMAILER_URL
         fromService:
+          type: web
           name: rentroo-emailer
           property: host
-        sync: false
       - key: APP_DOMAIN
         value: api.rentroo.sensibleanalytics.co
       - key: APP_PROTOCOL
