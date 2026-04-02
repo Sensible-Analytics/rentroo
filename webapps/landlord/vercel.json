@@ -1,17 +1,11 @@
 {
   "version": 2,
   "name": "rentroo-landlord",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next"
-    }
-  ],
+  "packageManager": "yarn",
   "installCommand": "cd ../.. && yarn install --frozen-lockfile",
   "buildCommand": "cd ../.. && yarn build && cd webapps/landlord && yarn build",
   "outputDirectory": ".next",
   "framework": "nextjs",
-
   "env": {
     "NEXT_PUBLIC_APP_NAME": "Rentro",
     "NEXT_PUBLIC_GATEWAY_URL": "https://api.rentroo.sensibleanalytics.co",
