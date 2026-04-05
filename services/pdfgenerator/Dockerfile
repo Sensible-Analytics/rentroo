@@ -15,9 +15,9 @@ COPY types types
 COPY services/common services/common
 COPY services/pdfgenerator/package.json services/pdfgenerator/package.json
 RUN --mount=type=cache,id=node_modules,target=/root/.yarn YARN_CACHE_FOLDER=/root/.yarn \
-    yarn workspaces focus @rentrooo/pdfgenerator && \
-    yarn workspace @rentrooo/types run build && \
-    yarn workspace @rentrooo/common run build
+    yarn workspaces focus @rentroo/pdfgenerator && \
+    yarn workspace @rentroo/types run build && \
+    yarn workspace @rentroo/common run build
 
 FROM base AS deps
 WORKDIR /usr/app
@@ -31,7 +31,7 @@ COPY --from=build /usr/app/services/common/package.json ./services/common/packag
 COPY --from=build /usr/app/services/pdfgenerator/package.json ./services/pdfgenerator/package.json
 COPY --from=build /usr/app/services/common/dist ./services/common/dist
 RUN --mount=type=cache,id=node_modules,target=/root/.yarn YARN_CACHE_FOLDER=/root/.yarn \
-    yarn workspaces focus --production @rentrooo/pdfgenerator
+    yarn workspaces focus --production @rentroo/pdfgenerator
 
 FROM base
 RUN apk upgrade --no-cache --available \

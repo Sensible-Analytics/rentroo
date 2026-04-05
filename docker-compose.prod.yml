@@ -92,7 +92,7 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3001
-      - MONGO_URL=mongodb://mongo:27017/rentrooo
+      - MONGO_URL=mongodb://${MONGO_ROOT_USERNAME:-admin}:${MONGO_ROOT_PASSWORD:-changeme}@mongo:27017/rentrooo?authSource=admin
       - REDIS_URL=redis://redis:6379
       - REDIS_PASSWORD=${REDIS_PASSWORD:-redis_password}
       - AUTHENTICATOR_ACCESS_TOKEN_SECRET=${AUTHENTICATOR_ACCESS_TOKEN_SECRET}

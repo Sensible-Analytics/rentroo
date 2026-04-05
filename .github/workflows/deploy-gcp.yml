@@ -1,0 +1,128 @@
+name: Deploy to Google Cloud Free Tier VM
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - appname: gateway
+            image: ghcr.io/sensible-analytics/rentroo/gateway
+            dockerfile: services/gateway/Dockerfile
+          - appname: api
+            image: ghcr.io/sensible-analytics/rentroo/api
+            dockerfile: services/api/Dockerfile
+          - appname: tenantapi
+            image: ghcr.io/sensible-analytics/rentroo/tenantapi
+            dockerfile: services/tenantapi/Dockerfile
+          - appname: authenticator
+            image: ghcr.io/sensible-analytics/rentroo/authenticator
+            dockerfile: services/authenticator/Dockerfile
+          - appname: pdfgenerator
+            image: ghcr.io/sensible-analytics/rentroo/pdfgenerator
+            dockerfile: services/pdfgenerator/Dockerfile
+          - appname: emailer
+            image: ghcr.io/sensible-analytics/rentroo/emailer
+            dockerfile: services/emailer/Dockerfile
+          - appname: resetservice
+            image: ghcr.io/sensible-analytics/rentroo/resetservice
+            dockerfile: services/resetservice/Dockerfile
+          - appname: landlord-frontend
+            image: ghcr.io/sensible-analytics/rentroo/landlord-frontend
+            dockerfile: webapps/landlord/Dockerfile
+          - appname: tenant-frontend
+            image: ghcr.io/sensible-analytics/rentroo/tenant-frontend
+            dockerfile: webapps/tenant/Dockerfile
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ${{ matrix.dockerfile }}
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: ${{ matrix.image }}:latest
+
+  deploy:
+    needs: [build-and-push]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Copy deployment files to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.GCP_VM_IP }}
+          username: ubuntu
+          key: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
+          source: 'docker-compose.yml,docker-compose.prod.yml,.env.production.gcp,Caddyfile,scripts/setup-vm.sh'
+          target: '~/app'
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.GCP_VM_IP }}
+          username: ubuntu
+          key: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
+          script: |
+            cd ~/app
+            mv .env.production.gcp .env
+
+            # Use environment secrets for sensitive values
+            echo "MONGO_ROOT_PASSWORD=${{ secrets.MONGO_ROOT_PASSWORD }}" >> .env
+            echo "REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }}" >> .env
+            echo "AUTHENTICATOR_ACCESS_TOKEN_SECRET=${{ secrets.AUTHENTICATOR_ACCESS_TOKEN_SECRET }}" >> .env
+            echo "AUTHENTICATOR_REFRESH_TOKEN_SECRET=${{ secrets.AUTHENTICATOR_REFRESH_TOKEN_SECRET }}" >> .env
+            echo "AUTHENTICATOR_RESET_TOKEN_SECRET=${{ secrets.AUTHENTICATOR_RESET_TOKEN_SECRET }}" >> .env
+            echo "CIPHER_KEY=${{ secrets.CIPHER_KEY }}" >> .env
+            echo "CIPHER_IV_KEY=${{ secrets.CIPHER_IV_KEY }}" >> .env
+            echo "RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}" >> .env
+            echo "R2_ACCOUNT_ID=${{ secrets.R2_ACCOUNT_ID }}" >> .env
+            echo "R2_ACCESS_KEY_ID=${{ secrets.R2_ACCESS_KEY_ID }}" >> .env
+            echo "R2_SECRET_ACCESS_KEY=${{ secrets.R2_SECRET_ACCESS_KEY }}" >> .env
+
+            if ! command -v docker &> /dev/null; then
+              sudo apt-get update
+              sudo apt-get install -y docker.io docker-compose-plugin
+              sudo usermod -aG docker $USER
+            fi
+
+            mkdir -p data/mongodb data/redis backup logs
+
+            sudo docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
+            sudo docker compose -f docker-compose.yml -f docker-compose.prod.yml pull
+            sudo docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+
+            echo "Waiting for services to start..."
+            sleep 30
+
+            if curl -f http://localhost:8080/health; then
+              echo "Deployment successful!"
+            else
+              echo "Health check failed. Logs:"
+              sudo docker compose logs --tail=50
+              exit 1
+            fi
