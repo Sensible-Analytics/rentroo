@@ -21,6 +21,7 @@
     "url": "https://github.com/rentroo/rentroo/issues"
   },
   "homepage": "https://github.com/rentroo/rentroo#readme",
+  "packageManager": "yarn@1.22.19",
   "workspaces": [
     "cli",
     "e2e",

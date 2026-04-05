@@ -14,9 +14,9 @@ COPY types types
 COPY services/common services/common
 COPY services/api/package.json services/api/package.json
 RUN --mount=type=cache,id=node_modules,target=/root/.yarn YARN_CACHE_FOLDER=/root/.yarn \
-    yarn workspaces focus @rentrooo/api && \
-    yarn workspace @rentrooo/types run build && \
-    yarn workspace @rentrooo/common run build
+    yarn workspaces focus @rentroo/api && \
+    yarn workspace @rentroo/types run build && \
+    yarn workspace @rentroo/common run build
 
 FROM base AS deps
 WORKDIR /usr/app
@@ -30,7 +30,7 @@ COPY --from=build /usr/app/services/common/package.json ./services/common/packag
 COPY --from=build /usr/app/services/api/package.json ./services/api/package.json
 COPY --from=build /usr/app/services/common/dist ./services/common/dist
 RUN --mount=type=cache,id=node_modules,target=/root/.yarn YARN_CACHE_FOLDER=/root/.yarn \
-    yarn workspaces focus --production @rentrooo/api
+    yarn workspaces focus --production @rentroo/api
 
 FROM base
 ENV NODE_ENV production

@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@rentroo/common": "*",
-    "moment": "2.29.4"
+    "moment": "2.30.1"
   },
   "devDependencies": {
     "@rentroo/types": "*",
@@ -36,9 +36,9 @@
     "@typescript-eslint/parser": "7.15.0",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-import": "2.29.1",
+    "eslint-plugin-import": "2.32.0",
     "npm-run-all": "4.1.5",
-    "rimraf": "6.0.1",
+    "rimraf": "6.1.3",
     "tsx": "3.14.0",
     "typescript": "5.5.4"
   }
