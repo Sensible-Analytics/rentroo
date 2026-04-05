@@ -4724,7 +4724,7 @@ __metadata:
     prop-types: 15.8.1
     react: 18.2.0
     react-awesome-lightbox: 1.8.1
-    react-day-picker: 8.10.0
+    react-day-picker: 9.14.0
     react-dom: 18.2.0
     react-icons: 5.3.0
     recharts: 2.13.3
@@ -4829,7 +4829,7 @@ __metadata:
     npm-run-all: 4.1.5
     postcss: 8.5.8
     react: 18.2.0
-    react-day-picker: 8.10.1
+    react-day-picker: 9.14.0
     react-dom: 18.2.0
     react-hook-form: 7.54.2
     rimraf: 6.0.1
@@ -9366,7 +9366,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:>=2":
+"date-fns@npm:>=2, date-fns@npm:^4.1.0":
   version: 4.1.0
   resolution: "date-fns@npm:4.1.0"
   checksum: fb681b242cccabed45494468f64282a7d375ea970e0adbcc5dcc92dcb7aba49b2081c2c9739d41bf71ce89ed68dd73bebfe06ca35129490704775d091895710b
@@ -17046,23 +17046,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-day-picker@npm:8.10.0":
-  version: 8.10.0
-  resolution: "react-day-picker@npm:8.10.0"
+"react-day-picker@npm:9.14.0":
+  version: 9.14.0
+  resolution: "react-day-picker@npm:9.14.0"
+  dependencies:
+    "@date-fns/tz": ^1.4.1
+    "@tabby_ai/hijri-converter": 1.0.5
+    date-fns: ^4.1.0
+    date-fns-jalali: 4.1.0-0
   peerDependencies:
-    date-fns: ^2.28.0 || ^3.0.0
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: a265e8c2f3f0e92e5a23e2edeca40fe67c67c00bae64aa9e1a99c6fe7f58b2f697b538937822b8f68d4b890d7903a06f074f1365deb465a0aeef1a14c701cc65
-  languageName: node
-  linkType: hard
-
-"react-day-picker@npm:8.10.1":
-  version: 8.10.1
-  resolution: "react-day-picker@npm:8.10.1"
-  peerDependencies:
-    date-fns: ^2.28.0 || ^3.0.0
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: daf7fb5aad1e355df9149e954fafc2cd40ceb90de799db4f36ef86d24729aaecfdf022fa9e63f24d093d81dc2beb60f65ae796741dff0f7305a2af80b333fb4c
+    react: ">=16.8.0"
+  checksum: 231602c2fbb063af3acaacb4a99a525f96bfee5be88c0f7e62c619a4b2b461cf5ba648b9d165fdd929caf582dbb3dcb8ee157dc6225a467315a7f59589a1b85d
   languageName: node
   linkType: hard
 
