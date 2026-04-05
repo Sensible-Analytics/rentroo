@@ -22,11 +22,11 @@
     "generateStrings": "node scripts/extractlocalizedstrings.js"
   },
   "devDependencies": {
-    "@babel/core": "7.21.3",
+    "@babel/core": "7.29.0",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "2.32.0",
-    "eslint-plugin-react": "7.33.2",
+    "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "4.6.0",
     "next-translate-plugin": "2.6.2",
     "prop-types": "15.8.1",
