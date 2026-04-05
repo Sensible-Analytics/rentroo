@@ -1,0 +1,53 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title Rentroo - System Context Diagram (C4 Level 1)
+
+Person(landlord, "Landlord", "Manages properties, tenants, leases, and rent payments")
+Person(tenant, "Tenant", "Views lease details and makes rent payments")
+Person(admin, "System Admin", "Monitors system health and manages deployments")
+
+System_Boundary(rentroo, "Rentroo System") {
+    System(web_app, "Web Application", "React-based web app for landlords and tenants", "https")
+    System(api_gateway, "API Gateway", "Routes requests to appropriate microservices", "Node.js")
+    System(property_service, "Property Service", "Manages properties, units, and specifications", "Node.js/TS")
+    System(tenant_service, "Tenant Service", "Manages tenant records and profiles", "Node.js/TS")
+    System(lease_service, "Lease Service", "Handles lease creation and management", "Node.js/TS")
+    System(payment_service, "Payment Service", "Tracks rent payments and overdue notices", "Node.js/TS")
+    System(notification_service, "Notification Service", "Sends emails, notices, and alerts", "Node.js/TS")
+    SystemDb(mongodb, "MongoDB Database", "Primary datastore for all services", "MongoDB")
+    System(desktop_app, "Desktop Application", "Tauri/Electron desktop app for offline access", "Tauri")
+}
+
+System_Ext(email_provider, "Email Provider", "Sends transactional emails", "SMTP/API")
+System_Ext(payment_gateway, "Payment Gateway", "Processes online rent payments", "Stripe/PayPal")
+System_Ext(hosting_platform, "Hosting Platform", "Cloud infrastructure (Northflank/Render/Railway)", "Docker")
+
+Rel(landlord, web_app, "Manages properties & tenants via", "HTTPS")
+Rel(landlord, desktop_app, "Uses for offline access", "Local")
+Rel(tenant, web_app, "Views lease & makes payments via", "HTTPS")
+Rel(admin, hosting_platform, "Monitors & deploys to", "HTTPS")
+
+Rel(web_app, api_gateway, "Sends API requests to", "HTTPS/REST")
+Rel(desktop_app, api_gateway, "Syncs data with", "HTTPS/REST")
+
+Rel(api_gateway, property_service, "Routes property requests", "Internal")
+Rel(api_gateway, tenant_service, "Routes tenant requests", "Internal")
+Rel(api_gateway, lease_service, "Routes lease requests", "Internal")
+Rel(api_gateway, payment_service, "Routes payment requests", "Internal")
+Rel(api_gateway, notification_service, "Routes notification requests", "Internal")
+
+Rel(property_service, mongodb, "Reads/Writes property data", "TCP")
+Rel(tenant_service, mongodb, "Reads/Writes tenant data", "TCP")
+Rel(lease_service, mongodb, "Reads/Writes lease data", "TCP")
+Rel(payment_service, mongodb, "Reads/Writes payment data", "TCP")
+Rel(notification_service, mongodb, "Reads/Writes notification data", "TCP")
+
+Rel(notification_service, email_provider, "Sends emails via", "SMTP/API")
+Rel(payment_service, payment_gateway, "Processes payments via", "HTTPS/API")
+
+Lay_D(landlord, tenant, admin)
+Lay_R(web_app, api_gateway, mongodb)
+Lay_R(property_service, tenant_service, lease_service, payment_service, notification_service)
+
+@enduml
