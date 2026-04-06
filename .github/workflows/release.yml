@@ -40,7 +40,7 @@ jobs:
          zip mre-win-x64.zip backup base.env docker-compose.microservices.base.yml docker-compose.microservices.prod.yml mre.exe
     
       - name: Upload commands in release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.event.release.tag_name }}
           name: ${{ github.event.release.tag_name }}
@@ -82,7 +82,7 @@ jobs:
         run: yarn workspace @rentroo/desktop-app build:linux
 
       - name: Upload Desktop App Release Assets
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.event.release.tag_name }}
           files: |
