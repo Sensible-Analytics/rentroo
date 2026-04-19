@@ -49,3 +49,6 @@ Thumbs.db
 .env.production
 backend/.env
 .vercel
+
+# Graphify Output
+graphify-out/
