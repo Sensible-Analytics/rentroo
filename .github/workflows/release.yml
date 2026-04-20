@@ -17,7 +17,7 @@ jobs:
          echo "RELEASE_TAG=${TAG#v}" >> $GITHUB_ENV
     
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: install node v20
         uses: actions/setup-node@v6
@@ -59,7 +59,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: Install Node.js
         uses: actions/setup-node@v6
@@ -121,7 +121,7 @@ jobs:
            echo "RELEASE_TAG=${TAG#v}" >> $GITHUB_ENV
 
         - name: Checkout
-          uses: actions/checkout@v3
+          uses: actions/checkout@v6
 
         - name: Set up Image Name (lowercase)
           run: |
