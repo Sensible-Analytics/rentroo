@@ -45,7 +45,7 @@
     "@tiptap/extension-table-row": "2.6.6",
     "@tiptap/extension-text-align": "2.6.6",
     "@tiptap/extension-underline": "2.6.6",
-    "@tiptap/pm": "2.6.6",
+    "@tiptap/pm": "3.22.2",
     "@tiptap/react": "2.6.6",
     "@tiptap/starter-kit": "2.6.6",
     "axios": "1.14.1",
