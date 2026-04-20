@@ -32,7 +32,7 @@
   "license": "MIT",
   "dependencies": {
     "@rentroo/common": "*",
-    "axios": "1.14.1",
+    "axios": "1.15.1",
     "ejs": "3.1.10",
     "i18n": "0.15.3",
     "jsonwebtoken": "9.0.3",
